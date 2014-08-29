@@ -1,4 +1,4 @@
-openerp-addons-cis
+odoo-addons-cis
 ==================
 
 This project contains extra-addons modules for the project Odoo.
