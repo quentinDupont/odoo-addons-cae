@@ -1,0 +1,16 @@
+<?xml version="1.0" ?>
+<openerp>
+	<data>
+<!--Company-->
+        <record id="base.res_company_rule" model="ir.rule">
+            <field name="domain_force"></field>
+        </record>
+        <record id="base.res_partner_rule" model="ir.rule">
+            <field name="domain_force">['|','|','|',
+                ('company_id','=',user.company_id.id),
+                ('company_id','=',user.company_id.fiscal_company.id),
+                ('company_id','in',[c.id for c in user.company_id.fiscal_childs]),
+                ('company_id','=',False)]</field>
+        </record>
+    </data>
+</openerp>

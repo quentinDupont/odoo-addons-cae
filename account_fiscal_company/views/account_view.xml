@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+        <record id="view_account_move_form_account" model="ir.ui.view">
+            <field name="name">view.account.move.form.account</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Journal Items']/field[@name='line_id']/tree[@string='Journal Items']/field[@name='account_id']" position="attributes">
+<!--                    old value : [('journal_id','=',parent.journal_id),('company_id', '=', parent.company_id)]-->
+                    <attribute name="domain">[('journal_id','=',parent.journal_id)]</attribute> 
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_bank_statement_form_inherit" model="ir.ui.view">
+            <field name="name">account.bank.statement.form.inherit</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Transactions']/field[@name='line_ids']/tree[@string='Statement lines']/field[@name='account_id']" position="attributes">
+<!--                    old value : [('journal_id','=',parent.journal_id), ('company_id', '=', parent.company_id)]-->
+                    <attribute name="domain">[('journal_id','=',parent.journal_id)]</attribute> 
+                </xpath>
+                <xpath expr="//page[@string='Transactions']/field[@name='line_ids']/tree[@string='Statement lines']/field[@name='analytic_account_id']" position="attributes">
+<!--                    old value : [('company_id', '=', parent.company_id), ('type', '&lt;&gt;', 'view')]-->
+                    <attribute name="domain">[('type', '&lt;&gt;', 'view')]</attribute> 
+                </xpath>
+                <xpath expr="//page[@string='Transactions']/field[@name='line_ids']/form[@string='Statement lines']/group/field[@name='account_id']" position="attributes">
+<!--                    old value : [('journal_id','=',parent.journal_id), ('company_id', '=', parent.company_id)]-->
+                    <attribute name="domain">[('journal_id','=',parent.journal_id)]</attribute> 
+                </xpath>
+                <xpath expr="//page[@string='Transactions']/field[@name='line_ids']/form[@string='Statement lines']/group/field[@name='analytic_account_id']" position="attributes">
+<!--                    old value : [('company_id', '=', parent.company_id), ('type', '&lt;&gt;', 'view')]-->
+                    <attribute name="domain">[('type', '&lt;&gt;', 'view')]</attribute> 
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_move_form_inherit" model="ir.ui.view">
+            <field name="name">account.move.form.inherit</field>
+            <field name="model">account.move</field>
+            <field name="inherit_id" ref="account.view_move_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Information']/group/group[@string='Amount']/field[@name='account_id']" position="attributes">
+<!--                    old value : [('company_id', '=', parent.company_id), ('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]-->
+                    <attribute name="domain">[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]</attribute> 
+                </xpath>
+                <xpath expr="//tree[@string='Journal Items']/field[@name='account_id']" position="attributes">
+<!--                    old value : [('journal_id','=',parent.journal_id),('company_id', '=', parent.company_id)]-->
+                    <attribute name="domain">[('journal_id','=',parent.journal_id)]</attribute> 
+                </xpath>
+            </field>
+        </record>
+        
+        <record id="view_model_line_tree_inherit" model="ir.ui.view">
+            <field name="name">account.model.line.inherit</field>
+            <field name="model">account.model.line</field>
+            <field name="inherit_id" ref="account.view_model_line_tree"/>
+            <field name="arch" type="xml">
+                <field name="account_id" position="attributes">
+<!--                    old value : [('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation'), ('company_id', '=', parent.company_id)]-->
+                    <attribute name="domain">[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]</attribute> 
+                </field>
+            </field>
+        </record>
+        
+        <record id="view_model_line_form_inherit" model="ir.ui.view">
+            <field name="name">account.model.line.inherit</field>
+            <field name="model">account.model.line</field>
+            <field name="inherit_id" ref="account.view_model_line_form"/>
+            <field name="arch" type="xml">
+                <field name="account_id" position="attributes">
+<!--                    old value : [('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation'), ('company_id', '=', parent.company_id)]-->
+                    <attribute name="domain">[('type','&lt;&gt;','view'),('type','&lt;&gt;','consolidation')]</attribute> 
+                </field>
+            </field>
+        </record>
+        
+        <record id="view_bank_statement_form2_inherit" model="ir.ui.view">
+            <field name="name">account.bank.statement.form.inherit</field>
+            <field name="model">account.bank.statement</field>
+            <field name="inherit_id" ref="account.view_bank_statement_form2"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@string='Cash Transactions']/field/tree/field[@name='account_id']" position="attributes">
+<!--                    old value : [('journal_id','=',parent.journal_id), ('company_id', '=', parent.company_id)]-->
+                    <attribute name="domain">[('journal_id','=',parent.journal_id)]</attribute> 
+                </xpath>
+                <xpath expr="//page[@string='Cash Transactions']/field/form/group/field[@name='account_id']" position="attributes">
+<!--                    old value : [('journal_id', '=', parent.journal_id), ('type', '&lt;&gt;', 'view'), ('company_id', '=', parent.company_id)]-->
+                    <attribute name="domain">[('journal_id', '=', parent.journal_id), ('type', '&lt;&gt;', 'view')]</attribute> 
+                </xpath>
+                <xpath expr="//page[@string='Cash Transactions']/field/form/group/field[@name='analytic_account_id']" position="attributes">
+<!--                    old value : [('company_id', '=', parent.company_id), ('type', '&lt;&gt;', 'view')]-->
+                    <attribute name="domain">[('type', '&lt;&gt;', 'view')]</attribute> 
+                </xpath>
+            </field>
+        </record>
+    </data>
+</openerp>
