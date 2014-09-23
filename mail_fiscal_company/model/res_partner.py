@@ -1,9 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Fiscal Company for Product Module for Odoo
+#    Fiscal Company for Mail Module for Odoo
 #    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
-#    @author Julien WESTE
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,4 +20,12 @@
 #
 ##############################################################################
 
-from . import product_template
+from openerp.osv.orm import Model
+
+
+class res_partner(Model):
+    _inherit = 'res.partner'
+
+    _defaults = {
+        'notification_email_send': 'comment',
+    }

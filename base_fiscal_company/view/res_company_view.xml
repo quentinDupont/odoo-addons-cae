@@ -13,9 +13,6 @@
                 </field>
                 <notebook position="inside">
                     <page string="Fiscal information">
-<!--                        <group colspan="4">-->
-<!--                            <group>-->
-<!--                                <separator string="Origin information" colspan="2"/>-->
                         <field name="fiscal_childs" />
                     </page>
                 </notebook>
