@@ -60,4 +60,5 @@ Copyright, Author and Licence :
         'views/account_view.xml',
         'views/account_invoice_view.xml',
     ],
+    'auto_install': True,
 }
