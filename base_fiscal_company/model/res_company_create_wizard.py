@@ -22,7 +22,7 @@
 ##############################################################################
 
 import string
-from random import *
+from random import choice
 
 from openerp.osv import fields
 from openerp.osv.orm import TransientModel
