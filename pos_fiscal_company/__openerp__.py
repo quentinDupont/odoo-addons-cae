@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Fiscal Company for Account Module for Odoo
+#    Fiscal Company for Point Of Sale Module for Odoo
 #    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
 #    @author Julien WESTE
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -21,10 +21,36 @@
 #
 ##############################################################################
 
-from . import account
-from . import account_move_line
-from . import account_bank_statement
-from . import account_automatic_reconcile
-from . import account_voucher
-from . import product_product
-from . import product_category
+{
+    'name': 'CIS - Point Of Sale Fiscal Company',
+    'version': '1.0',
+    'category': 'CIS',
+    'description': """
+Manage specific account move for cooperative
+============================================
+
+Features :
+----------
+    * Use this field res_company.fiscal_company for account move"""
+    """, account fiscal year, etc.
+
+Copyright, Author and Licence :
+-------------------------------
+    * Copyright : 2013-Today, Groupement Régional Alimentaire de Proximité;
+    * Author :
+        * Julien WESTE;
+        * Sylvain LE GAL (https://twitter.com/legalsylvain);
+    * Licence : AGPL-3 (http://www.gnu.org/licenses/)
+    """,
+    'author': 'GRAP',
+    'website': 'http://www.grap.coop',
+    'license': 'AGPL-3',
+    'depends': [
+        'base_fiscal_company',
+        'point_of_sale',
+    ],
+    'data': [
+        'security/ir_rule.xml',
+    ],
+    'auto_install': True,
+}

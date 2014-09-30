@@ -22,7 +22,7 @@
 ##############################################################################
 
 from openerp.osv.orm import Model
-from account_fiscal_company.account_parameters\
+from account_fiscal_company.account_parameters \
     import propagate_properties_to_fiscal_childs
 
 

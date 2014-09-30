@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Fiscal Company for Account Module for Odoo
+#    Fiscal Company for Point Of Sale Module for Odoo
 #    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
 #    @author Julien WESTE
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -21,10 +21,4 @@
 #
 ##############################################################################
 
-from . import account
-from . import account_move_line
-from . import account_bank_statement
-from . import account_automatic_reconcile
-from . import account_voucher
-from . import product_product
-from . import product_category
+from . import model

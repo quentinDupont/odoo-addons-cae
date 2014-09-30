@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Fiscal Company for Account Module for Odoo
+#    Fiscal Company for Point Of Sale Module for Odoo
 #    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
 #    @author Julien WESTE
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -21,10 +21,6 @@
 #
 ##############################################################################
 
-import logging
-
-_logger = logging.getLogger(__name__)
-
 from openerp.osv.orm import Model
 from openerp.osv import fields
 
@@ -38,8 +34,7 @@ class pos_order_line(Model):
         cur_obj = self.pool.get('res.currency')
         for line in self.browse(cr, uid, ids, context=context):
             taxes_ids = [
-                tax for tax in line.product_id.taxes_id
-                if (
+                tax for tax in line.product_id.taxes_id if (
                     tax.company_id.id == line.order_id.company_id.id
                     or (tax.company_id.id
                         == line.order_id.company_id.fiscal_company.id))]
