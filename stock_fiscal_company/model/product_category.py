@@ -28,7 +28,6 @@ class product_category(Model):
     _inherit = 'product.category'
 
     def init(self, cr):
-        print "===================== COINCOIN"
         self._PRODUCT_CATEGORY_FISCAL_PROPERTY_LIST.extend([
             'property_stock_journal',
             'property_stock_account_input_categ',
