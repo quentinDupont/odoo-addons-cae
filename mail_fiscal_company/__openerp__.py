@@ -54,8 +54,5 @@ Copyright, Author and Licence :
         'mail',
         'base_fiscal_company',
     ],
-    'data': [
-#        'data/ir_values.yml',
-    ],
     'auto_install': True,
 }
