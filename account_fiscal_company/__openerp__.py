@@ -36,11 +36,12 @@ Features :
 
 TODO :
 ------
-    * Split this Module into account_fiscal_company and pos_fiscal_company
+    * Update the description of this module;
+    * Check the ir.model.access model
 
 Copyright, Author and Licence :
 -------------------------------
-    * Copyright : 2013, Groupement Régional Alimentaire de Proximité;
+    * Copyright : 2013-Today, Groupement Régional Alimentaire de Proximité;
     * Author :
         * Julien WESTE;
         * Sylvain LE GAL (https://twitter.com/legalsylvain);
@@ -52,10 +53,10 @@ Copyright, Author and Licence :
     'depends': [
         'base_fiscal_company',
         'account',
-        'point_of_sale',
+        'stock',
     ],
     'data': [
-        'security/ir_rule_data.xml',
+        'security/ir_rule.xml',
         'security/ir.model.access.csv',
         'views/account_view.xml',
         'views/account_invoice_view.xml',
