@@ -53,7 +53,6 @@ Copyright, Author and Licence :
     'depends': [
         'base_fiscal_company',
         'account',
-        'stock',
     ],
     'data': [
         'security/ir_rule.xml',

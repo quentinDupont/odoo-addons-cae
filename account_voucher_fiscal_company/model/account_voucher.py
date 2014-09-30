@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Fiscal Company for Account Module for Odoo
+#    Fiscal Company for Account Voucher Module for Odoo
 #    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
 #    @author Julien WESTE
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -21,9 +21,17 @@
 #
 ##############################################################################
 
-from . import account
-from . import account_move_line
-from . import account_bank_statement
-from . import account_automatic_reconcile
-from . import product_product
-from . import product_category
+from openerp.osv.orm import Model
+
+
+class account_voucher(Model):
+    _inherit = 'account.voucher'
+
+    def writeoff_move_line_get(
+            self, cr, uid, voucher_id, line_total, move_id,
+            name, company_currency, current_currency, context=None):
+        if context.get('force_company', False):
+            del context['force_company']
+        return super(account_voucher, self).writeoff_move_line_get(
+            cr, uid, voucher_id, line_total, move_id,
+            name, company_currency, current_currency, context=context)

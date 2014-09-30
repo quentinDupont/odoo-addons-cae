@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Fiscal Company for Account Module for Odoo
+#    Fiscal Company for Stock Module for Odoo
 #    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
 #    @author Julien WESTE
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
@@ -21,9 +21,17 @@
 #
 ##############################################################################
 
-from . import account
-from . import account_move_line
-from . import account_bank_statement
-from . import account_automatic_reconcile
-from . import product_product
-from . import product_category
+from openerp.osv.orm import Model
+
+
+class product_category(Model):
+    _inherit = 'product.category'
+
+    def init(self, cr):
+        print "===================== COINCOIN"
+        self._PRODUCT_CATEGORY_FISCAL_PROPERTY_LIST.extend([
+            'property_stock_journal',
+            'property_stock_account_input_categ',
+            'property_stock_account_output_categ',
+            'property_stock_valuation_account_id',
+        ])
