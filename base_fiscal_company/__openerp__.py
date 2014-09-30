@@ -52,7 +52,9 @@ Copyright, Author and Licence :
     'data': [
         'security/ir_rule.xml',
         'security/res_groups.yml',
-        'view/res_company_view.xml',
+        'view/view.xml',
+        'view/action.xml',
+        'view/menu.xml',
     ],
     'demo': [
         'demo/demo.xml',

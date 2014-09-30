@@ -21,18 +21,20 @@
 #
 ##############################################################################
 
+from lxml import etree
+
 from openerp.osv import fields
 from openerp.osv.orm import Model
-
-_RES_COMPANY_FISCAL_TYPE = [
-    ('normal', 'Normal'),
-    ('fiscal_mother', 'Fiscal Mother Company'),
-    ('fiscal_child', 'Fiscal Child Company'),
-]
 
 
 class res_company(Model):
     _inherit = 'res.company'
+
+    _RES_COMPANY_FISCAL_TYPE = [
+        ('normal', 'Normal'),
+        ('fiscal_mother', 'Fiscal Mother Company'),
+        ('fiscal_child', 'Fiscal Child Company'),
+    ]
 
     # Private function section
     def _propagate_access_right(self, cr, uid, ids, context=None):
@@ -53,13 +55,20 @@ class res_company(Model):
             'res.company', 'Fiscal Company'),
         'fiscal_childs': fields.one2many(
             'res.company', 'fiscal_company', 'Fiscal Childs', readonly=True),
+        'code': fields.char(
+            'Code', size=3,
+            help="""This field is used as a prefix to generate automatic and"""
+            """ unique reference for items (product, ...)."""
+            """Warning, changing this value will change the reference of all"""
+            """ items of this company.""",
+        ),
     }
 
     _defaults = {
         'fiscal_type': 'normal',
     }
 
-    # Constraint Function Section
+    # Constraint Section
     def _check_non_fiscal_child_company(self, cr, uid, ids, context=None):
         for rc in self.browse(cr, uid, ids, context=context):
             # skip special case of creation
@@ -78,7 +87,6 @@ class res_company(Model):
                     return False
         return True
 
-    # Constraint Section
     _constraints = [
         (_check_non_fiscal_child_company,
             "You can't select an other company for a Non Fiscal Child Company",
@@ -89,6 +97,22 @@ class res_company(Model):
     ]
 
     # Overload Section
+    def fields_view_get(
+            self, cr, uid, view_id=None, view_type='form', context=None,
+            toolbar=False):
+        """Add a required modifiers on the field code"""
+        res = super(res_company, self).fields_view_get(
+            cr, uid, view_id=view_id, view_type=view_type, context=context,
+            toolbar=toolbar)
+        if view_type in ('form', 'tree')\
+                and 'code' in res['fields']:
+            res['fields']['required'] = True
+            doc = etree.XML(res['arch'])
+            node = doc.xpath("//field[@name='code']")[0]
+            node.set('modifiers', '{"required": true}')
+            res['arch'] = etree.tostring(doc)
+        return res
+
     def create(self, cr, uid, vals, context=None):
         company_id = super(res_company, self).create(
             cr, uid, vals, context=context)

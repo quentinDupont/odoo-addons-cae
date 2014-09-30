@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- ********************************************************************** -->
+<!--Fiscal Company for Base Module for Odoo                                 -->
+<!--Copyright (C) 2013-Today GRAP (http://www.grap.coop)                    -->
+<!--@author Julien Weste                                                    -->
+<!--@author Sylvain LE GAL (https://twitter.com/legalsylvain)               -->
+
+<!--This program is free software: you can redistribute it and/or modify    -->
+<!--it under the terms of the GNU Affero General Public License as          -->
+<!--published by the Free Software Foundation, either version 3 of the      -->
+<!--License, or (at your option) any later version.                         -->
+
+<!--This program is distributed in the hope that it will be useful,         -->
+<!--but WITHOUT ANY WARRANTY; without even the implied warranty of          -->
+<!--MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the           -->
+<!--GNU Affero General Public License for more details.                     -->
+
+<!--You should have received a copy of the GNU Affero General Public License-->
+<!--along with this program.  If not, see <http://www.gnu.org/licenses/>.   -->
+<!-- ********************************************************************** -->
+<openerp>
+    <data>
+
+<!-- Model: res.company -->
+        <record id="view_res_company_form" model="ir.ui.view">
+            <field name="name">res.company.form</field>
+            <field name="model">res.company</field>
+            <field name="inherit_id" ref="base.view_company_form"/>
+            <field name="arch" type="xml">
+                <field name="parent_id" position="after">
+                    <field name="fiscal_type"/>
+                    <field name="fiscal_company"/>
+                    <field name="code"/>
+                </field>
+                <notebook position="inside">
+                    <page string="Fiscal information">
+                        <field name="fiscal_childs" />
+                    </page>
+                </notebook>
+            </field>
+        </record>
+
+<!-- Model: res.company.create.wizard -->
+        <record id="view_res_company_create_wizard_form" model="ir.ui.view">
+            <field name="name">Create a New Company</field>
+            <field name="model">res.company.create.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Create a New Company" version="7.0">
+                    <field name="state" invisible="1"/>
+                    <group col="4" states="init">
+                        <separator string="General Information" colspan="4"/>
+                        <field name="name"/>
+                        <field name="type"/>
+                        <field name="mother_company"/>
+                        <field name="code"/>
+                        <separator string="Accounting Information" colspan="4"/>
+                        <field name="vat" attrs="{'invisible': [('type','=','integrated')]}"/>
+                    </group>
+                    <group states="done">
+                        <separator string="User Information" colspan="4"/>
+                        <field name="code" string="Login"/>
+                        <field name="password" string="Password"/>
+                    </group>
+                    <footer>
+                        <div states="init">
+                            <button name="validate" string="Validate" type="object" class="oe_highlight"/>
+                            <span>or</span>
+                            <button special="cancel" string="Cancel" class="oe_link"/>
+                        </div>
+                        <div states="done">
+                            <button special="cancel" string="Close" class="oe_link"/>
+                        </div>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+    </data>
+</openerp>
+
