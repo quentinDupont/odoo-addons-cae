@@ -1,9 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Fiscal Company for Stock Module for Odoo
-#    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
-#    @author Julien WESTE
+#    Fiscal Company for Sale Module for Odoo
+#    Copyright (C) 2014-Today GRAP (http://www.grap.coop)
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,5 +20,34 @@
 #
 ##############################################################################
 
-from . import product_category
-from . import res_company_create_wizard
+{
+    'name': 'CIS - Sale Fiscal Company',
+    'version': '1.1',
+    'category': 'CIS',
+    'description': """
+Manage specific account move for cooperative
+============================================
+
+Features :
+----------
+    * TODO;
+
+TODO :
+------
+    * Update the description of this module;
+
+Copyright, Author and Licence :
+-------------------------------
+    * Copyright : 2014-Today, Groupement Régional Alimentaire de Proximité;
+    * Author : Sylvain LE GAL (https://twitter.com/legalsylvain);
+    * Licence : AGPL-3 (http://www.gnu.org/licenses/)
+    """,
+    'author': 'GRAP',
+    'website': 'http://www.grap.coop',
+    'license': 'AGPL-3',
+    'depends': [
+        'base_fiscal_company',
+        'sale',
+    ],
+    'auto_install': True,
+}

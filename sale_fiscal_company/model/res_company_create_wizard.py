@@ -2,8 +2,7 @@
 ##############################################################################
 #
 #    Fiscal Company for Stock Module for Odoo
-#    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
-#    @author Julien WESTE
+#    Copyright (C) 2014-Today GRAP (http://www.grap.coop)
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,5 +20,27 @@
 #
 ##############################################################################
 
-from . import product_category
-from . import res_company_create_wizard
+from openerp.osv.orm import TransientModel
+from openerp.tools.translate import _
+
+
+class res_company_create_wizard(TransientModel):
+    _inherit = 'res.company.create.wizard'
+
+    # Overload Section
+    def begin(self, cr, uid, id, context=None):
+        ss_obj = self.pool['sale.shop']
+        res = super(res_company_create_wizard, self).begin(
+            cr, uid, id, context=context)
+        rccw = self.browse(cr, uid, id, context=context)
+
+        # Create Sale Shop
+        ss_obj.create(cr, uid, {
+            'name': _('%s - Shop') % (rccw.code),
+            'warehouse_id': res['warehouse_id'],
+            'payment_default_id': res['payment_term_id'],
+            'pricelist_id': res['public_pricelist_id'],
+            'company_id': rccw.company_id.id,
+            }, context=context)
+
+        return res

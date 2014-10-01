@@ -1,9 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Fiscal Company for Stock Module for Odoo
-#    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
-#    @author Julien WESTE
+#    Fiscal Company for Sale Module for Odoo
+#    Copyright (C) 2014-Today GRAP (http://www.grap.coop)
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,5 +20,4 @@
 #
 ##############################################################################
 
-from . import product_category
-from . import res_company_create_wizard
+from . import model

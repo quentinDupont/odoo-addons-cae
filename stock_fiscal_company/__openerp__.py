@@ -54,6 +54,7 @@ Copyright, Author and Licence :
     ],
     'data': [
         'security/ir_rule.xml',
+        'view/view.xml',
     ],
     'auto_install': True,
 }

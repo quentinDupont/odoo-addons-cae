@@ -36,15 +36,19 @@ class res_company_create_wizard(TransientModel):
     _COMPANY_TYPE = [
         ('integrated', 'Integrated Company'),
         ('associated', 'Associated Company'),
+        # TODO ('mother', 'Mother'),
     ]
 
     _columns = {
         'state': fields.selection(
-            [('init', 'init'), ('done', 'done')], 'Status', readonly=True),
+            [('init', 'init'), ('pending', 'pending'), ('done', 'done')],
+            'Status', readonly=True),
         'name': fields.char('Name', required=True, size=128),
         'mother_company': fields.many2one(
             'res.company', 'Mother Company', required=True,
             domain="[('fiscal_type', '!=', 'fiscal_child')]"),
+        'company_id': fields.many2one(
+            'res.company', 'Company'),
         'vat': fields.char(
             'Tax ID', size=32),
         'type': fields.selection(
@@ -87,16 +91,58 @@ class res_company_create_wizard(TransientModel):
     ]
 
     # View Section
-    def validate(self, cr, uid, ids, context=None):
-        rccw = self.browse(cr, uid, ids, context=context)[0]
+    def button_begin(self, cr, uid, ids, context=None):
+        id = ids[0]
+        self.begin(cr, uid, id, context=context)
+        self.write(cr, uid, [id], {
+            'state': 'pending'}, context=context)
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'res.company.create.wizard',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_id': id,
+            'views': [(False, 'form')],
+            'target': 'new',
+        }
+
+    def button_finish(self, cr, uid, ids, context=None):
+        id = ids[0]
+        self.finish(cr, uid, id, context=context)
+        self.write(cr, uid, [id], {
+            'state': 'done'}, context=context)
+        return {
+            'type': 'ir.actions.act_window',
+            'res_model': 'res.company.create.wizard',
+            'view_mode': 'form',
+            'view_type': 'form',
+            'res_id': id,
+            'views': [(False, 'form')],
+            'target': 'new',
+        }
+
+    # Overloadable Function
+    def res_company_default_values(self):
+        return {
+            'customer': False,
+        }
+
+    def res_users_default_values(self):
+        return {
+            'customer': False,
+        }
+
+    def begin(self, cr, uid, id, context=None):
+        rccw = self.browse(cr, uid, id, context=context)
         rc_obj = self.pool['res.company']
         ru_obj = self.pool['res.users']
         # Create Company
-        vals = {
+        vals = self.res_company_default_values()
+        vals.update({
             'name': rccw.name,
             'code': rccw.code,
             'parent_id': rccw.mother_company.id,
-            }
+            })
         if rccw.type == 'integrated':
             vals['vat'] = rccw.mother_company.vat
             vals['fiscal_type'] = 'fiscal_child'
@@ -111,24 +157,25 @@ class res_company_create_wizard(TransientModel):
         characters = string.ascii_letters + string.digits
         password = "".join(choice(characters) for x in range(8))
         # Create Generic User
-        ru_obj.create(cr, uid, {
+        vals = self.res_users_default_values()
+        vals.update({
             'name': rccw.name,
             'login': rccw.code,
             'new_password': password,
             'company_id': rc_id,
             'company_ids': [(4, rc_id)],
-        }, context=context)
-
-        self.write(cr, uid, ids, {
-            'state': 'done',
-            'password': password}, context=context)
-
+        })
+        ru_id = ru_obj.create(cr, uid, vals, context=context)
+        self.write(cr, uid, id, {
+            'password': password,
+            'company_id': rc_id,
+            }, context=context)
+        ru = ru_obj.browse(cr, uid, ru_id, context=context)
         return {
-            'type': 'ir.actions.act_window',
-            'res_model': 'res.company.create.wizard',
-            'view_mode': 'form',
-            'view_type': 'form',
-            'res_id': rccw.id,
-            'views': [(False, 'form')],
-            'target': 'new',
+            'company_id': rc_id,
+            'user_id': ru_id,
+            'partner_id': ru.partner_id,
         }
+
+    def finish(self, cr, uid, id, context=None):
+        return {}
