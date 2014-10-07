@@ -57,7 +57,7 @@
                     <notebook>
                         <page string="Accounting" states="init">
                             <group>
-                            <field name="vat" attrs="{'invisible': [('type','=','integrated')]}"/>
+                            <field name="vat" attrs="{'invisible': [('type','not in',('associated'))]}"/>
                             </group>
                         </page>
                     </notebook>

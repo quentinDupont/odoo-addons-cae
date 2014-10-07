@@ -122,12 +122,12 @@ class res_company_create_wizard(TransientModel):
         }
 
     # Overloadable Function
-    def res_company_default_values(self):
+    def res_company_values(self, cr, uid, id, context=None):
         return {
             'customer': False,
         }
 
-    def res_users_default_values(self):
+    def res_users_values(self, cr, uid, id, context=None):
         return {
             'customer': False,
         }
@@ -137,7 +137,7 @@ class res_company_create_wizard(TransientModel):
         rc_obj = self.pool['res.company']
         ru_obj = self.pool['res.users']
         # Create Company
-        vals = self.res_company_default_values()
+        vals = self.res_company_values(cr, uid, id, context=context)
         vals.update({
             'name': rccw.name,
             'code': rccw.code,
@@ -157,7 +157,7 @@ class res_company_create_wizard(TransientModel):
         characters = string.ascii_letters + string.digits
         password = "".join(choice(characters) for x in range(8))
         # Create Generic User
-        vals = self.res_users_default_values()
+        vals = self.res_users_values(cr, uid, id, context=context)
         vals.update({
             'name': rccw.name,
             'login': rccw.code,

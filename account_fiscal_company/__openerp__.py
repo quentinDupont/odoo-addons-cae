@@ -59,6 +59,7 @@ Copyright, Author and Licence :
         'security/ir.model.access.csv',
         'views/account_view.xml',
         'views/account_invoice_view.xml',
+        'views/view.xml',
     ],
     'auto_install': True,
 }

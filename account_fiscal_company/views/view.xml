@@ -26,9 +26,37 @@
             <field name="model">res.company.create.wizard</field>
             <field name="inherit_id" ref="base_fiscal_company.view_res_company_create_wizard_form"/>
             <field name="arch" type="xml">
+                <field name="vat" position="after">
+                    <field name="complete_tax_set" invisible="1"/>
+                    <field name="chart_template_id"
+                        widget="selection"
+                        on_change="onchange_chart_template_id(chart_template_id)"
+                        attrs="{'invisible': [('type', 'not in', ('associated'))]}"/>
+                    <field name="code_digits"
+                        attrs="{'invisible': [('chart_template_id','=',False)]}"/>
+                    <field name="sale_tax"
+                        attrs="{'invisible': ['|', ('chart_template_id','=',False), ('complete_tax_set','=',False)]}"
+                        domain="[('chart_template_id', '=', chart_template_id),('parent_id','=',False),('type_tax_use','in',('sale','all'))]"/>
+                    <field name="purchase_tax"
+                        attrs="{'invisible': ['|', ('chart_template_id','=',False), ('complete_tax_set','=',False)]}"
+                        domain="[('chart_template_id', '=', chart_template_id),('parent_id','=',False),('type_tax_use','in',('purchase', 'all'))]"/>
+                    <field name="sale_tax_rate"
+                        attrs="{'invisible': ['|', ('chart_template_id','=',False), ('complete_tax_set','=',True)]}"
+                        on_change="onchange_tax_rate(sale_tax_rate)"/>
+                    <field name="purchase_tax_rate"
+                        attrs="{'invisible': ['|', ('chart_template_id','=',False), ('complete_tax_set','=',True)]}"/>
+                </field>
                 <notebook position="inside">
                     <page string="Account Property" states="pending">
-                        <group>
+                        <group attrs="{'invisible': [('type', 'not in', ('associated'))]}">
+                        <separator string="Journal Sequence" />
+                        <label string="Please change the sequences of the new journals" />
+                        <field name="journal_ids">
+                            <tree string="bob">
+                                <field name="name"/>
+                                <field name="sequence_id"/>
+                            </tree>
+                        </field>
 <!--                            <field name="account_receivable"/>-->
 <!--                            <field name="account_payable"/>-->
 <!--                            <field name="account_expense_categ"/>-->
