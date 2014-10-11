@@ -33,15 +33,15 @@ class product_category(Model):
     def fields_view_get(
             self, cr, uid, view_id=None, view_type='form', context=None,
             toolbar=False):
-        """Add a required modifiers on the field product_code_prefix"""
+        """Add a required modifiers on the field code"""
         res = super(product_category, self).fields_view_get(
             cr, uid, view_id=view_id, view_type=view_type, context=context,
             toolbar=toolbar)
         if view_type in ('form', 'tree')\
-                and 'product_code_prefix' in res['fields']:
+                and 'code' in res['fields']:
             res['fields']['required'] = True
             doc = etree.XML(res['arch'])
-            node = doc.xpath("//field[@name='product_code_prefix']")[0]
+            node = doc.xpath("//field[@name='code']")[0]
             node.set('modifiers', '{"required": true}')
             res['arch'] = etree.tostring(doc)
         return res

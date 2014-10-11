@@ -33,13 +33,13 @@ class product_product(Model):
          category"""
         if pCompanyId:
             aPrefixCompany = self.pool.get('res.company').browse(
-                cr, uid, pCompanyId, context=context).product_code_prefix
+                cr, uid, pCompanyId, context=context).code
             if not aPrefixCompany:
                 aPrefixCompany = 'ZZZ'
         else:
             aPrefixCompany = 'ZZZ'
         aPrefixCategory = self.pool.get('product.category').browse(
-            cr, uid, pCategId, context=context).product_code_prefix
+            cr, uid, pCategId, context=context).code
         if not aPrefixCategory:
             aPrefixCategory = 'ZZZ'
 
