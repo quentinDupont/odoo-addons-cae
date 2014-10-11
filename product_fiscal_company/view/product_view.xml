@@ -29,6 +29,9 @@
                     <field name="administrative_ok"/>
                     <label for="administrative_ok"/>
                 </field>
+                <field name="type" position="after">
+                    <field name="code"/>
+                </field>
             </field>
         </record>
     </data>

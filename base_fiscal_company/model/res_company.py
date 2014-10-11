@@ -58,7 +58,7 @@ class res_company(Model):
         'code': fields.char(
             'Code', size=3,
             help="""This field is used as a prefix to generate automatic and"""
-            """ unique reference for items (product, ...)."""
+            """ unique reference for items (product, ...).\n"""
             """Warning, changing this value will change the reference of all"""
             """ items of this company.""",
         ),

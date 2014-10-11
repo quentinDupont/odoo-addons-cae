@@ -25,6 +25,7 @@
         <record model="res.company" id="base.main_company">
             <field name="fiscal_type">normal</field>
             <field name="fiscal_company" ref="base.main_company" />
+            <field name="code" >COM</field>
         </record>
 
 <!-- Create fiscal mother company and partner associated -->
