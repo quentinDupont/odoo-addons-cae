@@ -204,7 +204,6 @@ class account_automatic_reconcile(osv.osv_memory):
                 line_ids = [id for (id, ) in cr.fetchall()]
                 if line_ids:
                     reconciled += len(line_ids)
-                    print "reconcile ref: " + "ref" + str(line_ids)
                     if allow_write_off:
                         move_line_obj.reconcile(
                             cr, uid, line_ids, 'auto', form.writeoff_acc_id.id,

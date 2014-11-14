@@ -61,8 +61,6 @@ class res_company_create_wizard(TransientModel):
         res = super(res_company_create_wizard, self).begin(
             cr, uid, id, context=context)
         rccw = self.browse(cr, uid, id, context=context)
-        print "stock_fiscal_company"
-        print res
 
         # Create Stock Locations
         sl_physical_location_id = sl_obj.create(cr, uid, {
@@ -70,56 +68,56 @@ class res_company_create_wizard(TransientModel):
             'usage': 'view',
             'location_id': rccw.physical_location_parent_id.id,
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         sl_stock_id = sl_obj.create(cr, uid, {
             'name': _('%s - Stock') % (rccw.code),
             'usage': 'internal',
             'location_id': sl_physical_location_id,
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         sl_output_id = sl_obj.create(cr, uid, {
             'name': _('%s - Output') % (rccw.code),
             'usage': 'internal',
             'location_id': sl_physical_location_id,
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         sl_customer_location_id = sl_obj.create(cr, uid, {
             'name': _('%s - Customers') % (rccw.code),
             'usage': 'customer',
             'location_id': rccw.customer_location_parent_id.id,
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         sl_supplier_location_id = sl_obj.create(cr, uid, {
             'name': _('%s - Suppliers') % (rccw.code),
             'usage': 'supplier',
             'location_id': rccw.supplier_location_parent_id.id,
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         sl_inventory_location_id = sl_obj.create(cr, uid, {
             'name': _('%s - Inventory loss') % (rccw.code),
             'usage': 'inventory',
             'location_id': rccw.inventory_location_parent_id.id,
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         sl_procurement_location_id = sl_obj.create(cr, uid, {
             'name': _('%s - Procurements') % (rccw.code),
             'usage': 'procurement',
             'location_id': rccw.procurement_location_parent_id.id,
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         sl_production_location_id = sl_obj.create(cr, uid, {
             'name': _('%s - Production') % (rccw.code),
             'usage': 'production',
             'location_id': rccw.production_location_parent_id.id,
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         # TODO Check if it is necessary
 #        sl_obj.create(cr, uid, {
@@ -136,7 +134,7 @@ class res_company_create_wizard(TransientModel):
             'lot_stock_id': sl_stock_id,
             'lot_output_id': sl_output_id,
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         # Create Default Properties
         ip_obj.create(cr, uid, {
@@ -147,7 +145,7 @@ class res_company_create_wizard(TransientModel):
                 'field_res_partner_property_stock_supplier')[1],
             'type': 'many2one',
             'value_reference': 'stock.location,%s' % (sl_supplier_location_id),
-            }, context=context)
+        }, context=context)
 
         ip_obj.create(cr, uid, {
             'name': 'property_stock_customer',
@@ -157,7 +155,7 @@ class res_company_create_wizard(TransientModel):
                 'field_res_partner_property_stock_customer')[1],
             'type': 'many2one',
             'value_reference': 'stock.location,%s' % (sl_customer_location_id),
-            }, context=context)
+        }, context=context)
 
         # TODO Check if it is necessary
 #        ip_obj.create(cr, uid, {
@@ -180,7 +178,7 @@ class res_company_create_wizard(TransientModel):
             'type': 'many2one',
             'value_reference':
                 'stock.location,%s' % (sl_procurement_location_id),
-            }, context=context)
+        }, context=context)
 
         ip_obj.create(cr, uid, {
             'name': 'property_stock_inventory',
@@ -191,7 +189,7 @@ class res_company_create_wizard(TransientModel):
             'type': 'many2one',
             'value_reference':
                 'stock.location,%s' % (sl_inventory_location_id),
-            }, context=context)
+        }, context=context)
 
         ip_obj.create(cr, uid, {
             'name': 'property_stock_production',
@@ -202,7 +200,7 @@ class res_company_create_wizard(TransientModel):
             'type': 'many2one',
             'value_reference':
                 'stock.location,%s' % (sl_production_location_id),
-            }, context=context)
+        }, context=context)
 
         res.update({
             'warehouse_id': sw_id,

@@ -37,8 +37,6 @@ class res_company_create_wizard(TransientModel):
 
         res = super(res_company_create_wizard, self).begin(
             cr, uid, id, context=context)
-        print "product_fiscal_company"
-        print res
 
         rccw = self.browse(cr, uid, id, context=context)
 
@@ -48,18 +46,18 @@ class res_company_create_wizard(TransientModel):
             'currency_id': rccw.company_id.currency_id.id,
             'type': 'sale',
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         ppv_id = ppv_obj.create(cr, uid, {
             'name': _('%s - Default Public Pricelist Version') % (rccw.code),
             'pricelist_id': pp_id,
-            }, context=context)
+        }, context=context)
 
         ppi_obj.create(cr, uid, {
             'name': _('%s - Default Public Pricelist Line') % (rccw.code),
             'price_version_id': ppv_id,
             'base': 1,
-            }, context=context)
+        }, context=context)
 
         # Create Properties
         ip_obj.create(cr, uid, {
@@ -70,9 +68,9 @@ class res_company_create_wizard(TransientModel):
                 'field_res_partner_property_product_pricelist')[1],
             'type': 'many2one',
             'value_reference': 'product.pricelist,%s' % (pp_id),
-            }, context=context)
+        }, context=context)
 
         res.update({
             'public_pricelist_id': pp_id,
-            })
+        })
         return res
