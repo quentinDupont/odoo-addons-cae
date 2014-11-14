@@ -23,7 +23,7 @@
 
 from openerp.osv.orm import Model
 from openerp.osv import fields
-from account_fiscal_company.decorator import \
+from openerp.addons.account_fiscal_company.decorator import \
     switch_company, \
     switch_company_period, \
     add_user_company
