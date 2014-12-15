@@ -26,5 +26,12 @@
             <field name="domain_force">['|',('company_id','=',user.company_id.id),('company_id','=',False)]</field>
             <field model="ir.model" name="model_id" search="[('model', '=', u'pos.order')]"/>
         </record>
+
+        <record id="pos_line_rule" model="ir.rule">
+            <field name="name" >POS Line Multi Company</field>
+            <field name="domain_force">['|',('company_id','=',user.company_id.id),('company_id','=',False)]</field>
+            <field model="ir.model" name="model_id" search="[('model', '=', u'pos.order.line')]"/>
+        </record>
+
     </data>
 </openerp>
