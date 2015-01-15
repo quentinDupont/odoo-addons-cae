@@ -21,7 +21,6 @@
 ##############################################################################
 
 from openerp.osv.orm import TransientModel
-from openerp.tools.translate import _
 
 
 class res_company_create_wizard(TransientModel):

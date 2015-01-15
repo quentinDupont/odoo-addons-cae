@@ -38,8 +38,8 @@ class res_company_create_wizard(TransientModel):
             self, cr, uid, ids, type, mother_company, context=None):
         rc_obj = self.pool['res.company']
         res = super(
-                res_company_create_wizard, self).onchange_type_mother_company(
-                    cr, uid, ids, type, mother_company, context=context)
+            res_company_create_wizard, self).onchange_type_mother_company(
+                cr, uid, ids, type, mother_company, context=context)
         if type and mother_company and type == 'integrated':
             rc = rc_obj.browse(cr, uid, mother_company, context=context)
             res['value']['siret'] = rc.siret + ' XX'
@@ -54,5 +54,5 @@ class res_company_create_wizard(TransientModel):
         rccw = self.browse(cr, uid, id, context=context)
         res.update({
             'siret': rccw.siret,
-            })
+        })
         return res

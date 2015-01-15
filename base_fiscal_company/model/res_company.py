@@ -116,7 +116,6 @@ class res_company(Model):
     def create(self, cr, uid, vals, context=None):
         res = super(res_company, self).create(
             cr, uid, vals, context=context)
-        print vals
         if not vals.get('fiscal_company', False):
             self.write(cr, uid, [res], {
                 'fiscal_company': res}, context=context)

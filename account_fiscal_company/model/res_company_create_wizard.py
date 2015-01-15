@@ -28,7 +28,7 @@ class res_company_create_wizard(TransientModel):
     _inherit = 'res.company.create.wizard'
 
     def _get_journal_ids(
-        self, cr, uid, ids, field_name, arg, context=None):
+            self, cr, uid, ids, field_name, arg, context=None):
         res = {}
         aj_obj = self.pool['account.journal']
         for rccw in self.browse(cr, uid, ids, context=context):
@@ -90,7 +90,7 @@ class res_company_create_wizard(TransientModel):
         rccw = self.browse(cr, uid, id, context=context)
         res.update({
             'expects_chart_of_accounts': rccw.type in ['associated'],
-            })
+        })
         return res
 
     def begin(self, cr, uid, id, context=None):
@@ -139,7 +139,7 @@ class res_company_create_wizard(TransientModel):
 
         res.update({
             'payment_term_id': payment_term_id,
-            })
+        })
         return res
 
     def finish(self, cr, uid, id, context=None):

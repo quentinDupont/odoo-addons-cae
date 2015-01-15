@@ -41,6 +41,6 @@ class res_company_create_wizard(TransientModel):
             'payment_default_id': res['payment_term_id'],
             'pricelist_id': res['public_pricelist_id'],
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         return res

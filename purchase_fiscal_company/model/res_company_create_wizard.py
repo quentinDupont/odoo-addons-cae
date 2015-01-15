@@ -51,18 +51,18 @@ class res_company_create_wizard(TransientModel):
             'currency_id': rccw.company_id.currency_id.id,
             'type': 'purchase',
             'company_id': rccw.company_id.id,
-            }, context=context)
+        }, context=context)
 
         ppv_id = ppv_obj.create(cr, uid, {
             'name': _('%s - Default Purchase Pricelist Version') % (rccw.code),
             'pricelist_id': pp_id,
-            }, context=context)
+        }, context=context)
 
         ppi_obj.create(cr, uid, {
             'name': _('%s - Default Purchase Pricelist Line') % (rccw.code),
             'price_version_id': ppv_id,
             'base': -2,
-            }, context=context)
+        }, context=context)
 
         # Create Properties
         ip_obj.create(cr, uid, {
@@ -73,6 +73,6 @@ class res_company_create_wizard(TransientModel):
                 'field_res_partner_property_product_pricelist_purchase')[1],
             'type': 'many2one',
             'value_reference': 'product.pricelist,%s' % (pp_id),
-            }, context=context)
+        }, context=context)
 
         return res

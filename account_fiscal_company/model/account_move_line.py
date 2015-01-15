@@ -169,7 +169,7 @@ class account_move_line(Model):
                         tmp_amount = cur_obj.compute(
                             cr, uid, line.account_id.company_id.currency_id.id,
                             context.get('currency_id', False),
-                            abs(line.debit-line.credit),
+                            abs(line.debit - line.credit),
                             context={'date': line.date})
                         amount_currency_writeoff += (
                             (line.debit > 0)
@@ -298,14 +298,14 @@ class account_move_line(Model):
                     total += (line.debit or 0.0) - (line.credit or 0.0)
         if self.pool.get('res.currency').is_zero(cr, uid, currency_id, total):
             res = self.reconcile(
-                cr, uid, merges+unmerge, context=context,
+                cr, uid, merges + unmerge, context=context,
                 writeoff_acc_id=writeoff_acc_id,
                 writeoff_period_id=writeoff_period_id,
                 writeoff_journal_id=writeoff_journal_id)
             return res
         r_id = move_rec_obj.create(cr, uid, {
             'type': type,
-            'line_partial_ids': map(lambda x: (4, x, False), merges+unmerge)
+            'line_partial_ids': map(lambda x: (4, x, False), merges + unmerge)
         }, context=context)
         move_rec_obj.reconcile_partial_check(
             cr, uid, [r_id] + merges_rec, context=context)

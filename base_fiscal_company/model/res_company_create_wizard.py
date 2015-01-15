@@ -137,7 +137,6 @@ class res_company_create_wizard(TransientModel):
 
     def res_groups_values(self, cr, uid, context=None):
         res = ['base.group_sale_manager']
-        print res
         return res
 
     def begin(self, cr, uid, id, context=None):
@@ -153,7 +152,7 @@ class res_company_create_wizard(TransientModel):
             'name': rccw.name,
             'code': rccw.code,
             'parent_id': rccw.mother_company.id,
-            })
+        })
         if rccw.type == 'integrated':
             vals['fiscal_type'] = 'fiscal_child'
             vals['fiscal_company'] = rccw.mother_company.id
@@ -188,11 +187,10 @@ class res_company_create_wizard(TransientModel):
         self.write(cr, uid, id, {
             'password': password,
             'company_id': rc_id,
-            }, context=context)
+        }, context=context)
         ru = ru_obj.browse(cr, uid, ru_id, context=context)
 
         # Add user to groups
-        groups = []
         for group in self.res_groups_values(cr, uid, context=context):
             tab = group.split('.')
             rg_id = imd_obj.get_object_reference(cr, uid, tab[0], tab[1])[1]
@@ -202,7 +200,6 @@ class res_company_create_wizard(TransientModel):
             rg_obj.write(
                 cr, uid, [rg_id], {'users': [[6, False, users]]},
                 context=context)
-            
 
         return {
             'company_id': rc_id,
