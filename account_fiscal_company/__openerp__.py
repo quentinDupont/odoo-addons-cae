@@ -57,9 +57,9 @@ Copyright, Author and Licence :
     'data': [
         'security/ir_rule.xml',
         'security/ir.model.access.csv',
-        'views/account_view.xml',
-        'views/account_invoice_view.xml',
-        'views/view.xml',
+        'view/account_view.xml',
+        'view/account_invoice_view.xml',
+        'view/view.xml',
     ],
     'auto_install': True,
 }
