@@ -91,6 +91,11 @@ class res_company_create_wizard(TransientModel):
     ]
 
     # View Section
+    def onchange_type(
+            self, cr, uid, ids, type, mother_company, context=None):
+        """Overloadable function"""
+        return {'value': {}}
+
     def button_begin(self, cr, uid, ids, context=None):
         id = ids[0]
         self.begin(cr, uid, id, context=context)
@@ -123,9 +128,7 @@ class res_company_create_wizard(TransientModel):
 
     # Overloadable Function
     def res_company_values(self, cr, uid, id, context=None):
-        return {
-            'customer': False,
-        }
+        return {}
 
     def res_users_values(self, cr, uid, id, context=None):
         return {
@@ -144,20 +147,22 @@ class res_company_create_wizard(TransientModel):
             'parent_id': rccw.mother_company.id,
             })
         if rccw.type == 'integrated':
-            vals['vat'] = rccw.mother_company.vat
             vals['fiscal_type'] = 'fiscal_child'
             vals['fiscal_company'] = rccw.mother_company.id
             vals['rml_header'] = rccw.mother_company.rml_header
         else:
-            vals['vat'] = rccw.vat
             vals['fiscal_type'] = 'normal'
             vals['fiscal_company'] = False
         rc_id = rc_obj.create(cr, uid, vals, context=context)
 
+        # Create Generic User
         characters = string.ascii_letters + string.digits
         password = "".join(choice(characters) for x in range(8))
-        # Create Generic User
         vals = self.res_users_values(cr, uid, id, context=context)
+        if rccw.type == 'integrated':
+            vals['vat'] = rccw.mother_company.vat
+        else:
+            vals['vat'] = rccw.vat
         vals.update({
             'name': rccw.name,
             'login': rccw.code,

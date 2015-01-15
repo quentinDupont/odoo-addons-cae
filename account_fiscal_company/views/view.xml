@@ -49,22 +49,22 @@
                 <notebook position="inside">
                     <page string="Account Property" states="pending">
                         <group attrs="{'invisible': [('type', 'not in', ('associated'))]}">
-                        <separator string="Journal Sequence" />
-                        <label string="Please change the sequences of the new journals" />
-                        <field name="journal_ids">
-                            <tree string="bob">
-                                <field name="name"/>
-                                <field name="sequence_id"/>
-                            </tree>
-                        </field>
-<!--                            <field name="account_receivable"/>-->
-<!--                            <field name="account_payable"/>-->
-<!--                            <field name="account_expense_categ"/>-->
-<!--                            <field name="account_income_categ"/>-->
-<!--                            <field name="stock_account_input"/>-->
-<!--                            <field name="stock_account_output"/>-->
-<!--                            <field name="stock_account_input_categ"/>-->
-<!--                            <field name="stock_account_output_categ"/>-->
+                            <separator string="Journal Sequence" />
+                            <label string="Please change the sequences of the new journals" />
+                            <field name="journal_ids">
+                                <tree string="TODO">
+                                    <field name="name"/>
+                                    <field name="sequence_id"/>
+                                </tree>
+                            </field>
+    <!--                            <field name="account_receivable"/>-->
+    <!--                            <field name="account_payable"/>-->
+    <!--                            <field name="account_expense_categ"/>-->
+    <!--                            <field name="account_income_categ"/>-->
+    <!--                            <field name="stock_account_input"/>-->
+    <!--                            <field name="stock_account_output"/>-->
+    <!--                            <field name="stock_account_input_categ"/>-->
+    <!--                            <field name="stock_account_output_categ"/>-->
                         </group>
                     </page>
                 </notebook>
