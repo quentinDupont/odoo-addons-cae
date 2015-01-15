@@ -50,8 +50,8 @@
                     <group col="4" states="init">
                         <separator string="General Information" colspan="4"/>
                         <field name="name"/>
-                        <field name="mother_company"/>
-                        <field name="type" on_change="onchange_type(type, mother_company)"/>
+                        <field name="type" on_change="onchange_type_mother_company(type, mother_company)"/>
+                        <field name="mother_company" on_change="onchange_type_mother_company(type, mother_company)"/>
                         <field name="code"/>
                     </group>
                     <notebook>

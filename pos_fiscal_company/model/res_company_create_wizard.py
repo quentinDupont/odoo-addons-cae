@@ -2,8 +2,7 @@
 ##############################################################################
 #
 #    Fiscal Company for Point Of Sale Module for Odoo
-#    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
-#    @author Julien WESTE
+#    Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,34 +20,15 @@
 #
 ##############################################################################
 
-{
-    'name': 'CIS - Point Of Sale Fiscal Company',
-    'version': '1.0',
-    'category': 'CIS',
-    'description': """
-Manage specific account move for cooperative
-============================================
-
-TODO: PROBLEM.
+from openerp.osv.orm import TransientModel
+from openerp.tools.translate import _
 
 
-Copyright, Author and Licence :
--------------------------------
-    * Copyright : 2013-Today, Groupement Régional Alimentaire de Proximité;
-    * Author :
-        * Julien WESTE;
-        * Sylvain LE GAL (https://twitter.com/legalsylvain);
-    * Licence : AGPL-3 (http://www.gnu.org/licenses/)
-    """,
-    'author': 'GRAP',
-    'website': 'http://www.grap.coop',
-    'license': 'AGPL-3',
-    'depends': [
-        'base_fiscal_company',
-        'point_of_sale',
-    ],
-    'data': [
-        'security/ir_rule.xml',
-    ],
-    'auto_install': True,
-}
+class res_company_create_wizard(TransientModel):
+    _inherit = 'res.company.create.wizard'
+
+    def res_groups_values(self, cr, uid, context=None):
+        res = super(res_company_create_wizard, self).res_groups_values(
+            cr, uid, context=context)
+        res.append('point_of_sale.group_pos_manager')
+        return res

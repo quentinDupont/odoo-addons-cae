@@ -1,9 +1,8 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Fiscal Company for Point Of Sale Module for Odoo
-#    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
-#    @author Julien WESTE
+#    Fiscal Company for l10n_fr Module for Odoo
+#    Copyright (C) 2015 GRAP (http://www.grap.coop)
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -22,21 +21,22 @@
 ##############################################################################
 
 {
-    'name': 'CIS - Point Of Sale Fiscal Company',
-    'version': '1.0',
+    'name': 'CIS - l10n_fr Fiscal Company',
+    'version': '1.1',
     'category': 'CIS',
+    'summary': 'Glue Module between CIS and l10n_fr',
     'description': """
-Manage specific account move for cooperative
-============================================
+Glue Module between CIS and l10n_fr
+===================================
 
-TODO: PROBLEM.
-
+Features :
+----------
+    * Manage SIRET during the creation of a new company;
 
 Copyright, Author and Licence :
 -------------------------------
-    * Copyright : 2013-Today, Groupement Régional Alimentaire de Proximité;
+    * Copyright : 2015-Today, Groupement Régional Alimentaire de Proximité;
     * Author :
-        * Julien WESTE;
         * Sylvain LE GAL (https://twitter.com/legalsylvain);
     * Licence : AGPL-3 (http://www.gnu.org/licenses/)
     """,
@@ -45,10 +45,11 @@ Copyright, Author and Licence :
     'license': 'AGPL-3',
     'depends': [
         'base_fiscal_company',
-        'point_of_sale',
-    ],
-    'data': [
-        'security/ir_rule.xml',
+        'l10n_fr',
     ],
     'auto_install': True,
+    'data': [
+        'view/view.xml',
+    ]
+
 }

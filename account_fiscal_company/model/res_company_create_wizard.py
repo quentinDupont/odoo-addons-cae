@@ -78,6 +78,12 @@ class res_company_create_wizard(TransientModel):
     ]
 
     # Overload Section
+    def res_groups_values(self, cr, uid, context=None):
+        res = super(res_company_create_wizard, self).res_groups_values(
+            cr, uid, context=context)
+        res.append('account.group_account_user')
+        return res
+
     def res_company_values(self, cr, uid, id, context=None):
         res = super(res_company_create_wizard, self).res_company_values(
             cr, uid, id, context=context)

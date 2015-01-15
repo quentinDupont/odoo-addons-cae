@@ -27,6 +27,12 @@ from openerp.tools.translate import _
 class res_company_create_wizard(TransientModel):
     _inherit = 'res.company.create.wizard'
 
+    def res_groups_values(self, cr, uid, context=None):
+        res = super(res_company_create_wizard, self).res_groups_values(
+            cr, uid, context=context)
+        res.append('purchase.group_purchase_manager')
+        return res
+
     def begin(self, cr, uid, id, context=None):
         ip_obj = self.pool['ir.property']
         imd_obj = self.pool['ir.model.data']

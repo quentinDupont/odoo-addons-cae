@@ -116,12 +116,13 @@ class res_company(Model):
     def create(self, cr, uid, vals, context=None):
         res = super(res_company, self).create(
             cr, uid, vals, context=context)
+        print vals
         if not vals.get('fiscal_company', False):
-            self.write(cr, uid, [company_id], {
-                'fiscal_company': company_id}, context=context)
+            self.write(cr, uid, [res], {
+                'fiscal_company': res}, context=context)
         elif vals.get('fiscal_type', False) == 'fiscal_child':
             self._propagate_access_right(
-                cr, uid, [company_id], context=context)
+                cr, uid, [res], context=context)
         return res
 
     def write(self, cr, uid, ids, vals, context=None):

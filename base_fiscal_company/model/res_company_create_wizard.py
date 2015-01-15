@@ -91,7 +91,7 @@ class res_company_create_wizard(TransientModel):
     ]
 
     # View Section
-    def onchange_type(
+    def onchange_type_mother_company(
             self, cr, uid, ids, type, mother_company, context=None):
         """Overloadable function"""
         return {'value': {}}
@@ -135,10 +135,18 @@ class res_company_create_wizard(TransientModel):
             'customer': False,
         }
 
+    def res_groups_values(self, cr, uid, context=None):
+        res = ['base.group_sale_manager']
+        print res
+        return res
+
     def begin(self, cr, uid, id, context=None):
         rccw = self.browse(cr, uid, id, context=context)
         rc_obj = self.pool['res.company']
+        rg_obj = self.pool['res.groups']
+        rp_obj = self.pool['res.partner']
         ru_obj = self.pool['res.users']
+        imd_obj = self.pool['ir.model.data']
         # Create Company
         vals = self.res_company_values(cr, uid, id, context=context)
         vals.update({
@@ -155,14 +163,20 @@ class res_company_create_wizard(TransientModel):
             vals['fiscal_company'] = False
         rc_id = rc_obj.create(cr, uid, vals, context=context)
 
-        # Create Generic User
-        characters = string.ascii_letters + string.digits
-        password = "".join(choice(characters) for x in range(8))
-        vals = self.res_users_values(cr, uid, id, context=context)
+        # Manage Extra Data in Partner associated
+        vals = {'customer': False}
         if rccw.type == 'integrated':
             vals['vat'] = rccw.mother_company.vat
         else:
             vals['vat'] = rccw.vat
+        rc = rc_obj.browse(cr, uid, rc_id, context=context)
+        rp_obj.write(cr, uid, rc.partner_id.id, vals, context=context)
+
+        # Create Generic User
+        characters = string.ascii_letters + string.digits
+        password = "".join(choice(characters) for x in range(8))
+        vals = self.res_users_values(cr, uid, id, context=context)
+
         vals.update({
             'name': rccw.name,
             'login': rccw.code,
@@ -176,6 +190,20 @@ class res_company_create_wizard(TransientModel):
             'company_id': rc_id,
             }, context=context)
         ru = ru_obj.browse(cr, uid, ru_id, context=context)
+
+        # Add user to groups
+        groups = []
+        for group in self.res_groups_values(cr, uid, context=context):
+            tab = group.split('.')
+            rg_id = imd_obj.get_object_reference(cr, uid, tab[0], tab[1])[1]
+            rg = rg_obj.browse(cr, uid, rg_id, context=context)
+            users = [x.id for x in rg.users]
+            users.append(ru.id)
+            rg_obj.write(
+                cr, uid, [rg_id], {'users': [[6, False, users]]},
+                context=context)
+            
+
         return {
             'company_id': rc_id,
             'user_id': ru_id,
