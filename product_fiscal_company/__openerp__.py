@@ -2,8 +2,7 @@
 ##############################################################################
 #
 #    Fiscal Company for Product Module for Odoo
-#    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
-#    @author Julien WESTE
+#    Copyright (C) 2014-Today GRAP (http://www.grap.coop)
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -25,16 +24,19 @@
     'name': 'CIS - Product Fiscal Company',
     'version': '1.0',
     'category': 'CIS',
+    'summary': 'Glue Module between CIS and product',
     'description': """
-Change access to product
-========================
+Glue Module between CIS and product
+===================================
 
 Features :
 ----------
     * company_id is now mandatory on product_product;
     * user in mother company can see product of all child company;
-    * user in fiscal company can see but not update / delete product"""
-    """ of mother company ;
+    * user in fiscal company can see but not update / delete product
+      of mother company;
+    * Add a field 'is_administrative' on product.product; if checked the
+      product will not be updatable by basic users;
 
 Technical Information:
 ----------------------
@@ -43,9 +45,8 @@ Technical Information:
 
 Copyright, Author and Licence :
 -------------------------------
-    * Copyright : 2013, Groupement Régional Alimentaire de Proximité;
+    * Copyright : 2014, Groupement Régional Alimentaire de Proximité;
     * Author :
-        * Julien WESTE;
         * Sylvain LE GAL (https://twitter.com/legalsylvain);
     * Licence : AGPL-3 (http://www.gnu.org/licenses/)
     """,
@@ -60,7 +61,7 @@ Copyright, Author and Licence :
     'demo_xml': [],
     'update_xml': [
         'security/ir_rule.xml',
-        'view/product_view.xml',
+        'view/view.xml',
     ],
     'auto_install': True,
 }
