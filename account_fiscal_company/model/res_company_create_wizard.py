@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Fiscal Company for Stock Module for Odoo
+#    Fiscal Company for Account Module for Odoo
 #    Copyright (C) 2014-Today GRAP (http://www.grap.coop)
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
@@ -27,7 +27,8 @@ from openerp.osv.orm import TransientModel
 class res_company_create_wizard(TransientModel):
     _inherit = 'res.company.create.wizard'
 
-    def _get_journal_ids(self, cr, uid, ids, context=None):
+    def _get_journal_ids(
+        self, cr, uid, ids, field_name, arg, context=None):
         res = {}
         aj_obj = self.pool['account.journal']
         for rccw in self.browse(cr, uid, ids, context=context):
@@ -36,6 +37,7 @@ class res_company_create_wizard(TransientModel):
                     ('company_id', '=', rccw.company_id.id)], context=context)
             else:
                 res[rccw.id] = []
+        return res
 
     # Columns Section
     _columns = {
