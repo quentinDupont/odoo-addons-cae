@@ -6,8 +6,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-25 22:14+0000\n"
-"PO-Revision-Date: 2014-02-25 22:14+0000\n"
+"POT-Creation-Date: 2015-01-15 23:26+0000\n"
+"PO-Revision-Date: 2015-01-15 23:26+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -16,25 +16,87 @@ msgstr ""
 "Plural-Forms: \n"
 
 #. module: product_fiscal_company
-#: constraint:product.product:0
-msgid "Error: You cannot create a product without company."
-msgstr "Erreur: vous ne pouvez pas créer un produit sans société."
+#: code:addons/product_fiscal_company/model/res_company_create_wizard.py:44
+#, python-format
+msgid "%s - Default Public Pricelist"
+msgstr "%s -  Prix de Vente par défaut "
 
 #. module: product_fiscal_company
-#: model:ir.model,name:product_fiscal_company.model_product_product
-msgid "Product"
-msgstr "Produit"
+#: code:addons/product_fiscal_company/model/res_company_create_wizard.py:56
+#, python-format
+msgid "%s - Default Public Pricelist Line"
+msgstr "%s - Ligne de la Liste de Prix de Vente par Défaut"
 
 #. module: product_fiscal_company
-#: code:addons/product_fiscal_company/model/product_product.py:37
+#: code:addons/product_fiscal_company/model/res_company_create_wizard.py:51
+#, python-format
+msgid "%s - Default Public Pricelist Version"
+msgstr "%s -  Version de la Liste de Prix de Vente par Défaut"
+
+#. module: product_fiscal_company
+#: field:product.category,code:0
+msgid "Code"
+msgstr "Code"
+
+#. module: product_fiscal_company
+#: code:addons/product_fiscal_company/model/product_template.py:64
 #, python-format
 msgid "Error !"
 msgstr "Erreur !"
 
 #. module: product_fiscal_company
-#: code:addons/product_fiscal_company/model/product_product.py:37
-#: constraint:product.product:0
+#: constraint:product.template:0
+msgid "Error: You have no right to create or update an administrative product"
+msgstr "Erreur : Vous n'avez pas le droit de créer ou de mettre à jour un produit administratif"
+
+#. module: product_fiscal_company
+#: code:addons/product_fiscal_company/model/product_template.py:64
 #, python-format
-msgid "Error: You cannot update /delete the product of this company."
-msgstr "Erreur: Vous ne pouvez pas modifier ou supprimer le produit de cette société."
+msgid "Error: You have no right to delete an administrative product"
+msgstr "Erreur : Vous n'avez pas le droit de supprimer un produit administratif"
+
+#. module: product_fiscal_company
+#: help:product.template,administrative_ok:0
+msgid "If checked, this product will be readonly for users and updatable only by specific group"
+msgstr "Si la case est cochée, ce produit sera en lecture seule pour les utilisateurs, et modifiable seulement par les membres d'un groupe spécifique"
+
+#. module: product_fiscal_company
+#: field:product.template,administrative_ok:0
+msgid "Is Administrative"
+msgstr "Est Administratif"
+
+#. module: product_fiscal_company
+#: code:_description:0
+#: model:ir.model,name:product_fiscal_company.model_product_product
+#, python-format
+msgid "Product"
+msgstr "Produit"
+
+#. module: product_fiscal_company
+#: code:_description:0
+#: model:ir.model,name:product_fiscal_company.model_product_category
+#, python-format
+msgid "Product Category"
+msgstr "Catégorie de produits"
+
+#. module: product_fiscal_company
+#: code:_description:0
+#: model:ir.model,name:product_fiscal_company.model_product_template
+#, python-format
+msgid "Product Template"
+msgstr "Modèle d'article"
+
+#. module: product_fiscal_company
+#: help:product.category,code:0
+msgid "This field is used as a prefix to generate automatic and unique reference for items (product, ...).\n"
+"Warning, changing this value will change the reference of all items of this category."
+msgstr "Ce champ est utilisé comme préfixe pour générer des codes uniques et automatiques pour différents objets (produits, etc...).\n" "Attention, changer cette valeur changera la référence tous les items de cette société."
+
+
+#. module: product_fiscal_company
+#: code:_description:0
+#: model:ir.model,name:product_fiscal_company.model_res_company_create_wizard
+#, python-format
+msgid "res.company.create.wizard"
+msgstr "res.company.create.wizard"
 

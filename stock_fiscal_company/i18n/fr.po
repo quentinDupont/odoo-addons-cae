@@ -1,13 +1,13 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* account_fiscal_company
+#	* stock_fiscal_company
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2014-02-25 22:15+0000\n"
-"PO-Revision-Date: 2014-02-25 22:15+0000\n"
+"POT-Creation-Date: 2015-01-15 23:34+0000\n"
+"PO-Revision-Date: 2015-01-15 23:34+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,212 +15,111 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: account_fiscal_company
-#: view:account.bank.statement:0
-#: view:account.invoice.line:0
-msgid "[('journal_id', '=', parent.journal_id), ('type', '<>', 'view')]"
-msgstr "[('journal_id', '=', parent.journal_id), ('type', '<>', 'view')]"
-
-#. module: account_fiscal_company
-#: field:res.company,fiscal_childs:0
-msgid "Fiscal Childs"
-msgstr "Fiscal Childs"
-
-#. module: account_fiscal_company
-#: code:addons/account_fiscal_company/model/account_move_line.py:121
+#. module: stock_fiscal_company
+#: code:addons/stock_fiscal_company/model/res_company_create_wizard.py:88
 #, python-format
-msgid "Write-Off"
-msgstr "Write-Off"
+msgid "%s - Customers"
+msgstr "%s - Clients"
 
-#. module: account_fiscal_company
-#: view:account.invoice:0
-msgid "[('type','=', 'receivable')]"
-msgstr "[('type','=', 'receivable')]"
-
-#. module: account_fiscal_company
-#: code:addons/account_fiscal_company/model/account_move_line.py:106
+#. module: stock_fiscal_company
+#: code:addons/stock_fiscal_company/model/res_company_create_wizard.py:102
 #, python-format
-msgid "You have to provide an account for the write off/exchange difference entry !"
-msgstr "You have to provide an account for the write off/exchange difference entry !"
+msgid "%s - Inventory loss"
+msgstr "%s - Perte d'inventaire"
 
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_pos_order_line
-msgid "Lines of Point of Sale"
-msgstr "Lignes de Points de Vente"
-
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_product_product
-msgid "Product"
-msgstr "Produit"
-
-#. module: account_fiscal_company
-#: constraint:account.bank.statement:0
-msgid "The journal and period chosen have         to belong to the same company."
-msgstr "Le journal et la période doivent appartenir à la même société."
-
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_account_period
-msgid "Account period"
-msgstr "Période"
-
-#. module: account_fiscal_company
-#: view:account.invoice:0
-msgid "[('type','!=','view')]"
-msgstr "[('type','!=','view')]"
-
-#. module: account_fiscal_company
-#: view:account.bank.statement:0
-msgid "[('type', '<>', 'view')]"
-msgstr "[('type', '<>', 'view')]"
-
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_account_move_line
-msgid "Journal Items"
-msgstr "Écritures comptables"
-
-#. module: account_fiscal_company
-#: view:account.invoice:0
-msgid "[('journal_id', '=', parent.journal_id), ('type', '=', 'other')]"
-msgstr "[('journal_id', '=', parent.journal_id), ('type', '=', 'other')]"
-
-#. module: account_fiscal_company
-#: constraint:account.move.line:0
-msgid "Company must be the same for its related         account and period."
-msgstr "Le compte et la période doivent appartenir à la même société."
-
-#. module: account_fiscal_company
-#: field:res.company,fiscal_company:0
-msgid "Fiscal Company"
-msgstr "Société comptable"
-
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_account_account
-msgid "Account"
-msgstr "Compte"
-
-#. module: account_fiscal_company
-#: code:addons/account_fiscal_company/model/account_move_line.py:93
+#. module: stock_fiscal_company
+#: code:addons/stock_fiscal_company/model/res_company_create_wizard.py:81
 #, python-format
-msgid "Entry is already reconciled"
-msgstr "Entry is already reconciled"
+msgid "%s - Output"
+msgstr "%s - Sortie"
 
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_account_automatic_reconcile
-msgid "Automatic Reconcile"
-msgstr "Lettrage automatique"
-
-#. module: account_fiscal_company
-#: code:addons/account_fiscal_company/model/account_move_line.py:96
+#. module: stock_fiscal_company
+#: code:addons/stock_fiscal_company/model/res_company_create_wizard.py:67
 #, python-format
-msgid "Some entries are already reconciled !"
-msgstr "Some entries are already reconciled !"
+msgid "%s - Physical Locations"
+msgstr "%s - Emplacements Physiques"
 
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_res_company
-msgid "Companies"
-msgstr "Sociétés"
-
-#. module: account_fiscal_company
-#: view:account.invoice:0
-#: view:account.invoice.line:0
-msgid "[('parent_id','=',False)]"
-msgstr "[('parent_id','=',False)]"
-
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_account_fiscalyear
-msgid "Fiscal Year"
-msgstr "Exercice comptable"
-
-#. module: account_fiscal_company
-#: view:account.model.line:0
-#: view:account.move:0
-msgid "[('type','<>','view'),('type','<>','consolidation')]"
-msgstr "[('type','<>','view'),('type','<>','consolidation')]"
-
-#. module: account_fiscal_company
-#: code:addons/account_fiscal_company/model/account_move_line.py:73
-#: code:addons/account_fiscal_company/model/account_move_line.py:93
-#: code:addons/account_fiscal_company/model/account_move_line.py:96
+#. module: stock_fiscal_company
+#: code:addons/stock_fiscal_company/model/res_company_create_wizard.py:109
 #, python-format
-msgid "Error"
-msgstr "Error"
+msgid "%s - Procurements"
+msgstr "%s - Approvisionnements"
 
-#. module: account_fiscal_company
-#: code:addons/account_fiscal_company/model/account_move_line.py:69
+#. module: stock_fiscal_company
+#: code:addons/stock_fiscal_company/model/res_company_create_wizard.py:116
 #, python-format
-msgid "To reconcile the entries company should be the same for all entries"
-msgstr "To reconcile the entries company should be the same for all entries"
+msgid "%s - Production"
+msgstr "%s - Production"
 
-#. module: account_fiscal_company
-#: code:addons/account_fiscal_company/model/account_move_line.py:69
+#. module: stock_fiscal_company
+#: code:addons/stock_fiscal_company/model/res_company_create_wizard.py:74
 #, python-format
-msgid "Warning !"
-msgstr "Warning !"
+msgid "%s - Stock"
+msgstr "%s - Stock"
 
-#. module: account_fiscal_company
-#: code:addons/account_fiscal_company/model/account_automatic_reconcile.py:28
+#. module: stock_fiscal_company
+#: code:addons/stock_fiscal_company/model/res_company_create_wizard.py:95
 #, python-format
-msgid "UserError"
-msgstr "UserError"
+msgid "%s - Suppliers"
+msgstr "%s - Fournisseurs"
 
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_account_move
-msgid "Account Entry"
-msgstr "Pièce comptable"
-
-#. module: account_fiscal_company
-#: code:addons/account_fiscal_company/model/account_automatic_reconcile.py:28
+#. module: stock_fiscal_company
+#: code:addons/stock_fiscal_company/model/res_company_create_wizard.py:132
 #, python-format
-msgid "You must select accounts to reconcile"
-msgstr "You must select accounts to reconcile"
+msgid "%s - Warehouse"
+msgstr "%s - Entrepôt"
 
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_account_bank_statement
-msgid "Bank Statement"
-msgstr "Relevé bancaire"
+#. module: stock_fiscal_company
+#: field:res.company.create.wizard,customer_location_parent_id:0
+msgid "Parent Customers Location"
+msgstr "Emplacement Parent Clients"
 
-#. module: account_fiscal_company
-#: view:account.invoice:0
-#: view:account.invoice.line:0
-#: view:account.invoice.tax:0
-msgid "[('type','<>','view')]"
-msgstr "[('type','<>','view')]"
+#. module: stock_fiscal_company
+#: field:res.company.create.wizard,inventory_location_parent_id:0
+msgid "Parent Inventory Location"
+msgstr "Emplacement Parent Perte d'inventaire"
 
-#. module: account_fiscal_company
-#: code:addons/account_fiscal_company/model/account_move_line.py:106
+#. module: stock_fiscal_company
+#: field:res.company.create.wizard,physical_location_parent_id:0
+msgid "Parent Physical Locations"
+msgstr "Emplacement Parent Physique"
+
+#. module: stock_fiscal_company
+#: field:res.company.create.wizard,procurement_location_parent_id:0
+msgid "Parent Procurement Location"
+msgstr "Emplacement Parent Approvisionnement"
+
+#. module: stock_fiscal_company
+#: field:res.company.create.wizard,production_location_parent_id:0
+msgid "Parent Production Location"
+msgstr "Emplacement Parent Production"
+
+#. module: stock_fiscal_company
+#: field:res.company.create.wizard,scrapped_location_parent_id:0
+msgid "Parent Scrapped Location"
+msgstr "Emplacement Parent Rebus"
+
+#. module: stock_fiscal_company
+#: field:res.company.create.wizard,supplier_location_parent_id:0
+msgid "Parent Suppliers Location"
+msgstr "Emplacement Parent Fournisseurs"
+
+#. module: stock_fiscal_company
+#: code:_description:0
+#: model:ir.model,name:stock_fiscal_company.model_product_category
 #, python-format
-msgid "Warning"
-msgstr "Warning"
+msgid "Product Category"
+msgstr "Catégorie de produits"
 
-#. module: account_fiscal_company
-#: view:account.bank.statement:0
-#: view:account.move:0
-msgid "[('journal_id','=',parent.journal_id)]"
-msgstr "[('journal_id','=',parent.journal_id)]"
+#. module: stock_fiscal_company
+#: view:res.company.create.wizard:0
+msgid "Stock"
+msgstr "Stock"
 
-#. module: account_fiscal_company
-#: code:addons/account_fiscal_company/model/account_move_line.py:74
+#. module: stock_fiscal_company
+#: code:_description:0
+#: model:ir.model,name:stock_fiscal_company.model_res_company_create_wizard
 #, python-format
-msgid "Entry \"%s\" is not valid !"
-msgstr "Entry \"%s\" is not valid !"
-
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_account_invoice
-msgid "Invoice"
-msgstr "Facture"
-
-#. module: account_fiscal_company
-#: view:account.invoice:0
-msgid "[('type','=', 'payable')]"
-msgstr "[('type','=', 'payable')]"
-
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_pos_order
-msgid "Point of Sale"
-msgstr "Point de Vente"
-
-#. module: account_fiscal_company
-#: model:ir.model,name:account_fiscal_company.model_account_journal
-msgid "Journal"
-msgstr "Journal"
+msgid "res.company.create.wizard"
+msgstr "res.company.create.wizard"
 

@@ -1,13 +1,13 @@
 # Translation of OpenERP Server.
 # This file contains the translation of the following modules:
-#	* pos_fiscal_company
+#	* l10n_fr_fiscal_company
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: OpenERP Server 7.0\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2015-01-15 23:25+0000\n"
-"PO-Revision-Date: 2015-01-15 23:25+0000\n"
+"POT-Creation-Date: 2015-01-15 23:24+0000\n"
+"PO-Revision-Date: 2015-01-15 23:24+0000\n"
 "Last-Translator: <>\n"
 "Language-Team: \n"
 "MIME-Version: 1.0\n"
@@ -15,16 +15,14 @@ msgstr ""
 "Content-Transfer-Encoding: \n"
 "Plural-Forms: \n"
 
-#. module: pos_fiscal_company
-#: code:_description:0
-#: model:ir.model,name:pos_fiscal_company.model_pos_order_line
-#, python-format
-msgid "Lines of Point of Sale"
-msgstr "Lignes de Points de Vente"
+#. module: l10n_fr_fiscal_company
+#: field:res.company.create.wizard,siret:0
+msgid "SIRET"
+msgstr "SIRET"
 
-#. module: pos_fiscal_company
+#. module: l10n_fr_fiscal_company
 #: code:_description:0
-#: model:ir.model,name:pos_fiscal_company.model_res_company_create_wizard
+#: model:ir.model,name:l10n_fr_fiscal_company.model_res_company_create_wizard
 #, python-format
 msgid "res.company.create.wizard"
 msgstr "res.company.create.wizard"

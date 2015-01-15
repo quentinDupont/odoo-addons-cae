@@ -21,7 +21,7 @@
 ##############################################################################
 
 {
-    'name': 'CIS - Sale Fiscal Company',
+    'name': 'CIS - Purchase Fiscal Company',
     'version': '1.1',
     'category': 'CIS',
     'description': """

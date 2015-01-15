@@ -25,6 +25,7 @@
     'name': 'CIS - Base Fiscal Company',
     'version': '1.0',
     'category': 'CIS',
+    'summary': 'Manage the concept of fiscal company',
     'description': """
 Manage the concept of fiscal company
 ====================================
