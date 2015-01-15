@@ -29,14 +29,19 @@
 Glue Module between CIS and product
 ===================================
 
-Features :
-----------
+Features:
+---------
     * company_id is now mandatory on product_product;
     * user in mother company can see product of all child company;
     * user in fiscal company can see but not update / delete product
       of mother company;
     * Add a field 'is_administrative' on product.product; if checked the
       product will not be updatable by basic users;
+
+Creation Company Wizard:
+------------------------
+    * Create a Sale Pricelist and the associate property to
+      property_product_pricelist;
 
 Technical Information:
 ----------------------
