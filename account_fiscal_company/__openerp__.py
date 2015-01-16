@@ -32,12 +32,14 @@ Manage specific account move for cooperative
 Features :
 ----------
     * Use this field res_company.fiscal_company for account move"""
-    """, account fiscal year, etc.
+    """, account fiscal year, etc;
 
-TODO :
-------
+
+TODO:
+-----
     * Update the description of this module;
     * Check the ir.model.access model
+    * Propagate product category property when user creates new company;
 
 Copyright, Author and Licence :
 -------------------------------

@@ -2,8 +2,7 @@
 ##############################################################################
 #
 #    Fiscal Company for Account Module for Odoo
-#    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
-#    @author Julien WESTE
+#    Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
 #    This program is free software: you can redistribute it and/or modify
@@ -21,11 +20,8 @@
 #
 ##############################################################################
 
-from . import account
-from . import account_move_line
-from . import account_bank_statement
-from . import account_automatic_reconcile
-from . import product_product
-from . import product_category
-from . import res_company_create_wizard
-from . import res_company
+from openerp.osv.orm import Model
+
+
+class res_company(Model):
+    _inherit = 'res.company'

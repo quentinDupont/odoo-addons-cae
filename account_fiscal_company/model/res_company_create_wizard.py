@@ -59,7 +59,24 @@ class res_company_create_wizard(TransientModel):
             'Sales tax (%)'),
         'purchase_tax_rate': fields.float(
             'Purchase tax (%)'),
+        'account_receivable_id': fields.many2one(
+            'account.account', 'Account Receivable',
+            domain="[('company_id', '=', mother_company),"
+            "('type', '=', 'receivable')]"),
+        'account_payable_id': fields.many2one(
+            'account.account', 'Account Payable',
+            domain="[('company_id', '=', mother_company),"
+            "('type', '=', 'payable')]"),
     }
+
+    # account_payable
+    # account_expense_categ
+    # account_income_categ
+    # stock_account_input
+    # stock_account_output
+    # stock_account_input_categ
+    # stock_account_output_categ
+    # property_stock_journal
 
     # Constraint Section
     def _check_account_setting(self, cr, uid, ids, context=None):
@@ -143,9 +160,35 @@ class res_company_create_wizard(TransientModel):
         return res
 
     def finish(self, cr, uid, id, context=None):
+        ip_obj = self.pool['ir.property']
+        imd_obj = self.pool['ir.model.data']
+        rccw = self.browse(cr, uid, id, context=context)
+
         res = super(res_company_create_wizard, self).finish(
             cr, uid, id, context=context)
 
+        # Create Default Properties
+        ip_obj.create(cr, uid, {
+            'name': 'property_account_receivable',
+            'company_id': rccw.company_id.id,
+            'fields_id': imd_obj.get_object_reference(
+                cr, uid, 'account',
+                'field_res_partner_property_account_receivable')[1],
+            'type': 'many2one',
+            'value_reference': 'account.account,%s' % (
+                rccw.account_receivable_id.id),
+        }, context=context)
+
+        ip_obj.create(cr, uid, {
+            'name': 'property_account_payable',
+            'company_id': rccw.company_id.id,
+            'fields_id': imd_obj.get_object_reference(
+                cr, uid, 'account',
+                'field_res_partner_property_account_payable')[1],
+            'type': 'many2one',
+            'value_reference': 'account.account,%s' % (
+                rccw.account_payable_id.id),
+        }, context=context)
         # Create Account Property based on
         # account_receivable
         # account_payable
