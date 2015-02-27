@@ -42,8 +42,8 @@ class account_move_line(Model):
     def _check_company_id(self, cr, uid, ids, context=None):
         lines = self.browse(cr, uid, ids, context=context)
         for l in lines:
-            if (l.company_id.fiscal_company != l.account_id.company_id
-                    or l.company_id.fiscal_company != l.period_id.company_id):
+            if (l.company_id.fiscal_company != l.account_id.company_id or
+                    l.company_id.fiscal_company != l.period_id.company_id):
                 return False
         return True
 
@@ -83,8 +83,8 @@ class account_move_line(Model):
             context = {}
         company_list = []
         for line in self.browse(cr, uid, ids, context=context):
-            if (company_list
-                    and line.company_id.fiscal_company.id not in company_list):
+            if (company_list and
+                    line.company_id.fiscal_company.id not in company_list):
                 raise osv.except_osv(_('Warning !'), _(
                     """To reconcile the entries company should be the same"""
                     """ for all entries"""))
@@ -129,9 +129,9 @@ class account_move_line(Model):
             # any writeoff_acc_id).
             pass
         elif ((not currency_obj.is_zero(
-                cr, uid, account.company_id.currency_id, writeoff))
-                or (account.currency_id
-                    and (not currency_obj.is_zero(
+                cr, uid, account.company_id.currency_id, writeoff)) or
+                (account.currency_id and
+                    (not currency_obj.is_zero(
                         cr, uid, account.currency_id, currency)))):
             if not writeoff_acc_id:
                 raise osv.except_osv(
@@ -157,13 +157,13 @@ class account_move_line(Model):
             cur_obj = self.pool.get('res.currency')
             cur_id = False
             amount_currency_writeoff = 0.0
-            if (context.get('company_currency_id', False)
-                    != context.get('currency_id', False)):
+            if (context.get('company_currency_id', False) !=
+                    context.get('currency_id', False)):
                 cur_id = context.get('currency_id', False)
                 for line in unrec_lines:
-                    if (line.currency_id
-                            and line.currency_id.id
-                            == context.get('currency_id', False)):
+                    if (line.currency_id and
+                            line.currency_id.id ==
+                            context.get('currency_id', False)):
                         amount_currency_writeoff += line.amount_currency
                     else:
                         tmp_amount = cur_obj.compute(
@@ -172,8 +172,8 @@ class account_move_line(Model):
                             abs(line.debit - line.credit),
                             context={'date': line.date})
                         amount_currency_writeoff += (
-                            (line.debit > 0)
-                            and tmp_amount or -tmp_amount)
+                            (line.debit > 0) and
+                            tmp_amount or -tmp_amount)
 
             writeoff_lines = [
                 (0, 0, {
@@ -185,9 +185,9 @@ class account_move_line(Model):
                     'partner_id': partner_id,
                     'currency_id': cur_id or (account.currency_id.id or False),
                     'amount_currency': (
-                        amount_currency_writeoff
-                        and -1 * amount_currency_writeoff
-                        or (account.currency_id.id and -1 * currency or 0.0))
+                        amount_currency_writeoff and
+                        -1 * amount_currency_writeoff or
+                        (account.currency_id.id and -1 * currency or 0.0))
                 }),
                 (0, 0, {
                     'name': libelle,
@@ -199,9 +199,9 @@ class account_move_line(Model):
                     'partner_id': partner_id,
                     'currency_id': cur_id or (account.currency_id.id or False),
                     'amount_currency': (
-                        amount_currency_writeoff
-                        and amount_currency_writeoff
-                        or (account.currency_id.id and currency or 0.0))
+                        amount_currency_writeoff and
+                        amount_currency_writeoff or
+                        (account.currency_id.id and currency or 0.0))
                 })
             ]
 
@@ -237,8 +237,8 @@ class account_move_line(Model):
                 partner_id = (
                     lines[0].partner_id and lines[0].partner_id.id or False)
                 if (
-                    partner_id and context
-                        and context.get('stop_reconcile', False)):
+                    partner_id and context and
+                        context.get('stop_reconcile', False)):
                     partner_obj.write(
                         cr, uid, [partner_id], {
                             'last_reconciliation_date': (
@@ -260,8 +260,8 @@ class account_move_line(Model):
         if context is None:
             context = {}
         for line in self.browse(cr, uid, ids, context=context):
-            if (company_list
-                    and line.company_id.fiscal_company.id not in company_list):
+            if (company_list and
+                    line.company_id.fiscal_company.id not in company_list):
                 raise osv.except_osv(
                     _('Warning!'), _(
                         """To reconcile the entries company should be the"""
@@ -287,8 +287,8 @@ class account_move_line(Model):
                             total += line2.amount_currency
                         else:
                             total += (
-                                (line2.debit or 0.0)
-                                - (line2.credit or 0.0))
+                                (line2.debit or 0.0) -
+                                (line2.credit or 0.0))
                 merges_rec.append(line.reconcile_partial_id.id)
             else:
                 unmerge.append(line.id)
