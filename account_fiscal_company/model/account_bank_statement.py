@@ -37,8 +37,8 @@ class account_bank_statement(Model):
 
     def _check_company_id(self, cr, uid, ids, context=None):
         for statement in self.browse(cr, uid, ids, context=context):
-            if (statement.company_id.fiscal_company
-                    != statement.period_id.company_id.fiscal_company):
+            if (statement.company_id.fiscal_company !=
+                    statement.period_id.company_id.fiscal_company):
                 return False
         return True
 

@@ -292,11 +292,9 @@ class account_automatic_reconcile(osv.osv_memory):
             # unreconciled transactions to the unreconciled count
 #            import pdb; pdb.set_trace()
             partner_filter = (
-                partner_ids
-                and partner_ids[0]
-                and 'AND partner_id not in (%s)' % ','.join(
-                    map(str, filter(None, partner_ids)))
-                or '')
+                partner_ids and partner_ids[0] and
+                'AND partner_id not in (%s)' % ','.join(
+                    map(str, filter(None, partner_ids))) or '')
             cr.execute("""
                 SELECT count(*)
                 FROM account_move_line

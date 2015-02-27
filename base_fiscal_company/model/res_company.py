@@ -73,8 +73,8 @@ class res_company(Model):
         for rc in self.browse(cr, uid, ids, context=context):
             # skip special case of creation
             if rc.fiscal_company:
-                if (rc.fiscal_type in ('normal', 'fiscal_mother')
-                        and rc.id != rc.fiscal_company.id):
+                if (rc.fiscal_type in ('normal', 'fiscal_mother') and
+                        rc.id != rc.fiscal_company.id):
                     return False
         return True
 
@@ -82,8 +82,8 @@ class res_company(Model):
         for rc in self.browse(cr, uid, ids, context=context):
             # skip special case of creation
             if rc.fiscal_company is not None:
-                if (rc.fiscal_type == 'fiscal_child'
-                        and rc.fiscal_company.fiscal_type != 'fiscal_mother'):
+                if (rc.fiscal_type == 'fiscal_child' and
+                        rc.fiscal_company.fiscal_type != 'fiscal_mother'):
                     return False
         return True
 

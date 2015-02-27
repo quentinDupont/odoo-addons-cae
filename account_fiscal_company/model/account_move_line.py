@@ -186,7 +186,7 @@ class account_move_line(Model):
                     'currency_id': cur_id or (account.currency_id.id or False),
                     'amount_currency': (
                         amount_currency_writeoff and
-                        -1 * amount_currency_writeoff or
+                        (-1 * amount_currency_writeoff) or
                         (account.currency_id.id and -1 * currency or 0.0))
                 }),
                 (0, 0, {

@@ -35,9 +35,9 @@ class pos_order_line(Model):
         for line in self.browse(cr, uid, ids, context=context):
             taxes_ids = [
                 tax for tax in line.product_id.taxes_id if (
-                    tax.company_id.id == line.order_id.company_id.id
-                    or (tax.company_id.id
-                        == line.order_id.company_id.fiscal_company.id))]
+                    tax.company_id.id == line.order_id.company_id.id or
+                    (tax.company_id.id ==
+                        line.order_id.company_id.fiscal_company.id))]
             price = line.price_unit * (1 - (line.discount or 0.0) / 100.0)
             taxes = account_tax_obj.compute_all(
                 cr, uid, taxes_ids, price, line.qty, product=line.product_id,

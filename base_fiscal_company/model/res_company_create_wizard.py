@@ -76,8 +76,8 @@ class res_company_create_wizard(TransientModel):
                 if rccw.mother_company.fiscal_type != 'fiscal_mother':
                     return False
             if rccw.type == 'associated':
-                if (rccw.mother_company.fiscal_type != 'normal'
-                        or rccw.mother_company.parent_id):
+                if (rccw.mother_company.fiscal_type != 'normal' or
+                        rccw.mother_company.parent_id):
                     return False
         return True
 
