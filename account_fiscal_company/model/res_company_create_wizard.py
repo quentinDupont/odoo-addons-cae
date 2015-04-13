@@ -61,11 +61,11 @@ class res_company_create_wizard(TransientModel):
             'Purchase tax (%)'),
         'account_receivable_id': fields.many2one(
             'account.account', 'Account Receivable',
-            domain="[('company_id', '=', mother_company),"
+            domain="[('company_id', '=', fiscal_company),"
             "('type', '=', 'receivable')]"),
         'account_payable_id': fields.many2one(
             'account.account', 'Account Payable',
-            domain="[('company_id', '=', mother_company),"
+            domain="[('company_id', '=', fiscal_company),"
             "('type', '=', 'payable')]"),
     }
 

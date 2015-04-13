@@ -2,7 +2,7 @@
 ##############################################################################
 #
 #    Fiscal Company for Account Module for Odoo
-#    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
+#    Copyright (C) 2013-Today GRAP (http://www.grap.coop)
 #    @author Julien WESTE
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
@@ -31,15 +31,19 @@ Manage specific account move for cooperative
 
 Features :
 ----------
-    * Use this field res_company.fiscal_company for account move"""
-    """, account fiscal year, etc;
+* Create a field res_company.fiscal_company:
+    * This field allow user to create account move in a company, but with
+      account of fiscal mother company;
 
+* Account property propagation:
+    * Following fields property are propagated in all the fiscal child company:
+        * product_category / property_account_income_categ;
+        * product_category / property_account_expense_categ;
 
 TODO:
 -----
     * Update the description of this module;
     * Check the ir.model.access model
-    * Propagate product category property when user creates new company;
 
 Copyright, Author and Licence :
 -------------------------------
@@ -62,6 +66,13 @@ Copyright, Author and Licence :
         'view/account_view.xml',
         'view/account_invoice_view.xml',
         'view/view.xml',
+    ],
+    'demo': [
+        'demo/res_groups.yml',
+        'demo/account_fiscalyear.xml',
+        'demo/account_period.xml',
+        'demo/account_account.xml',
+        'demo/ir_property.xml',
     ],
     'auto_install': True,
 }

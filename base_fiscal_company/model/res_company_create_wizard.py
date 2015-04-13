@@ -49,6 +49,9 @@ class res_company_create_wizard(TransientModel):
             domain="[('fiscal_type', '!=', 'fiscal_child')]"),
         'company_id': fields.many2one(
             'res.company', 'Company'),
+        'fiscal_company': fields.related(
+            'company_id', 'fiscal_company', type='many2one',
+            relation='res.company', string='Fiscal Company'),
         'vat': fields.char(
             'Tax ID', size=32),
         'type': fields.selection(

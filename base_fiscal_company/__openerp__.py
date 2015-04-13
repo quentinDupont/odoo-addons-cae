@@ -58,6 +58,7 @@ Copyright, Author and Licence :
         'view/menu.xml',
     ],
     'demo': [
+        'demo/res_groups.yml',
         'demo/demo.xml',
     ],
 }

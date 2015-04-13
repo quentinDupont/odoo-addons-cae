@@ -59,8 +59,8 @@
                             </field>
                         </group>
                         <group>
-                            <field name="account_receivable_id" attrs="{'required': [('state', 'in', ['pending'])]}"/>
-                            <field name="account_payable_id" attrs="{'required': [('state', 'in', ['pending'])]}"/>
+                            <field name="account_receivable_id"/>
+                            <field name="account_payable_id"/>
     <!--                            <field name="account_expense_categ"/>-->
     <!--                            <field name="account_income_categ"/>-->
     <!--                            <field name="stock_account_input"/>-->

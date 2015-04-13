@@ -177,7 +177,7 @@ class res_company_create_wizard(TransientModel):
                 'field_product_template_property_stock_procurement')[1],
             'type': 'many2one',
             'value_reference':
-                'stock.location,%s' % (sl_procurement_location_id),
+            'stock.location,%s' % (sl_procurement_location_id),
         }, context=context)
 
         ip_obj.create(cr, uid, {
@@ -188,7 +188,7 @@ class res_company_create_wizard(TransientModel):
                 'field_product_template_property_stock_inventory')[1],
             'type': 'many2one',
             'value_reference':
-                'stock.location,%s' % (sl_inventory_location_id),
+            'stock.location,%s' % (sl_inventory_location_id),
         }, context=context)
 
         ip_obj.create(cr, uid, {
@@ -199,7 +199,7 @@ class res_company_create_wizard(TransientModel):
                 'field_product_template_property_stock_production')[1],
             'type': 'many2one',
             'value_reference':
-                'stock.location,%s' % (sl_production_location_id),
+            'stock.location,%s' % (sl_production_location_id),
         }, context=context)
 
         res.update({

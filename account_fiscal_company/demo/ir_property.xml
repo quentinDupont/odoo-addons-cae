@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+        <record model="ir.property" id="property_account_expense_category_mother">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="name">CIS - property_account_expense_categ</field>
+            <field name="fields_id" model="ir.model.fields"
+                search="[('model','=','product.category'),('name','=','property_account_expense_categ')]"/>
+            <field name="type">many2one</field>
+            <field name="res_id" model="product.category" ref="product.product_category_all"/>
+            <field name="value_reference" model="account.account" ref="account_fiscal_company.a_expense"/>
+        </record>
+
+        <record model="ir.property" id="property_account_income_category_mother">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="name">CIS - property_account_income_categ</field>
+            <field name="fields_id" model="ir.model.fields"
+                search="[('model','=','product.category'),('name','=','property_account_income_categ')]"/>
+            <field name="type">many2one</field>
+            <field name="value_reference" model="account.account" ref="account_fiscal_company.a_sale"/>
+            <field name="res_id" model="product.category" ref="product.product_category_all"/>
+        </record>
+
+<!-- Duplicate Data for child company, because this module doesn't apply propagation via property creation-->
+
+        <record model="ir.property" id="property_account_expense_category_child_1">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+            <field name="name">CIS - property_account_expense_categ - Child 1</field>
+            <field name="fields_id" model="ir.model.fields"
+                search="[('model','=','product.category'),('name','=','property_account_expense_categ')]"/>
+            <field name="type">many2one</field>
+            <field name="res_id" model="product.category" ref="product.product_category_all"/>
+            <field name="value_reference" model="account.account" ref="account_fiscal_company.a_expense"/>
+        </record>
+
+        <record model="ir.property" id="property_account_income_category_child_1">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+            <field name="name">CIS - property_account_income_categ - Child 1</field>
+            <field name="fields_id" model="ir.model.fields"
+                search="[('model','=','product.category'),('name','=','property_account_income_categ')]"/>
+            <field name="type">many2one</field>
+            <field name="value_reference" model="account.account" ref="account_fiscal_company.a_sale"/>
+            <field name="res_id" model="product.category" ref="product.product_category_all"/>
+        </record>
+
+        <record model="ir.property" id="property_account_expense_category_child_2">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_child_2"/>
+            <field name="name">CIS - property_account_expense_categ - Child 2</field>
+            <field name="fields_id" model="ir.model.fields"
+                search="[('model','=','product.category'),('name','=','property_account_expense_categ')]"/>
+            <field name="type">many2one</field>
+            <field name="res_id" model="product.category" ref="product.product_category_all"/>
+            <field name="value_reference" model="account.account" ref="account_fiscal_company.a_expense"/>
+        </record>
+
+        <record model="ir.property" id="property_account_income_category_child_2">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_child_2"/>
+            <field name="name">CIS - property_account_income_categ - Child 2</field>
+            <field name="fields_id" model="ir.model.fields"
+                search="[('model','=','product.category'),('name','=','property_account_income_categ')]"/>
+            <field name="type">many2one</field>
+            <field name="value_reference" model="account.account" ref="account_fiscal_company.a_sale"/>
+            <field name="res_id" model="product.category" ref="product.product_category_all"/>
+        </record>
+
+    </data>
+</openerp>

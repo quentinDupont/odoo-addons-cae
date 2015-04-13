@@ -47,12 +47,14 @@
             <field name="arch" type="xml">
                 <form string="Create a New Company" version="7.0">
                     <field name="state" invisible="1"/>
-                    <group col="4" states="init">
+                    <group col="4">
                         <separator string="General Information" colspan="4"/>
                         <field name="name"/>
                         <field name="type" on_change="onchange_type_mother_company(type, mother_company)"/>
                         <field name="mother_company" on_change="onchange_type_mother_company(type, mother_company)"/>
                         <field name="code"/>
+                        <field name="company_id"/>
+                        <field name="fiscal_company"/>
                     </group>
                     <notebook>
                         <page string="Accounting" states="init">

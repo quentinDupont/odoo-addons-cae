@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="utf-8"?>
+<openerp>
+    <data>
+
+       <record model="account.account" id="chart0">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CISX0</field>
+            <field name="name">CIS - Chart For Automated Tests</field>
+            <field name="type">view</field>
+            <field name="user_type" ref="account.data_account_type_view"/>
+        </record>
+
+        <record model="account.account" id="gpf">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CISX2</field>
+            <field name="name">CIS - Profit and Loss - (test)</field>
+            <field name="parent_id" ref="chart0"/>
+            <field name="type">view</field>
+            <field name="user_type" ref="account.data_account_type_view"/>
+        </record>
+
+        <!-- Income Part-->
+        <record model="account.account" id="income_view">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CISX20</field>
+            <field name="name">CIS - Income - (test)</field>
+            <field name="parent_id" ref="gpf"/>
+            <field name="type">view</field>
+            <field name="user_type" ref="account.data_account_type_income"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="rev">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CISX200</field>
+            <field name="name">CIS - Revenue - (test)</field>
+            <field name="parent_id" ref="income_view"/>
+            <field name="type">view</field>
+            <field name="user_type" ref="account.data_account_type_income"/>
+        </record>
+
+        <record model="account.account" id="a_sale">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CISX2001</field>
+            <field name="name">CIS - Product Sales - (test)</field>
+            <field name="parent_id" ref="rev"/>
+            <field name="type">other</field>
+            <field name="user_type" ref="account.data_account_type_income"/>
+        </record>
+
+        <!-- Expense Part-->
+        <record model="account.account" id="expense_view">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CISX21</field>
+            <field name="name">CIS - Expense - (test)</field>
+            <field name="parent_id" ref="gpf"/>
+            <field name="type">view</field>
+            <field name="user_type" ref="account.data_account_type_expense"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="ovr">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CISX211</field>
+            <field name="name">CIS - Overheads - (test)</field>
+            <field name="parent_id" ref="expense_view"/>
+            <field name="type">view</field>
+            <field name="user_type" ref="account.data_account_type_expense"/>
+        </record>
+
+        <record model="account.account" id="a_expense">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CISX2110</field>
+            <field name="name">CIS - Expenses - (test)</field>
+            <field name="parent_id" ref="ovr"/>
+            <field name="type">other</field>
+            <field name="user_type" ref="account.data_account_type_expense"/>
+        </record>
+    </data>
+</openerp>
