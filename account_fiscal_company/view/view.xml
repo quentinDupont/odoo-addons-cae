@@ -53,16 +53,6 @@
                 </field>
                 <notebook position="inside">
                     <page string="Account Property" states="pending">
-<!--                        <group attrs="{'invisible': [('type', 'not in', ('associated'))]}">-->
-<!--                            <separator string="Journal Sequence" />-->
-<!--                            <label string="Please change the sequences of the new journals" />-->
-<!--                            <field name="journal_ids">-->
-<!--                                <tree string="TODO">-->
-<!--                                    <field name="name"/>-->
-<!--                                    <field name="sequence_id"/>-->
-<!--                                </tree>-->
-<!--                            </field>-->
-<!--                        </group>-->
                         <group>
                             <field name="account_receivable_id"/>
                             <field name="account_payable_id"/>
@@ -77,6 +67,14 @@
                         </group>
                     </page>
                 </notebook>
+                    <group states="done">
+                        <separator string="Extra task To Do" colspan="4"/>
+                        <label string="Please create extra paiement journals" />
+
+                        <label string="Please create Taxes Group" />
+                        <label string="Please create Point Of Sale " />
+                        <label string="Please change the sequences of the new journals POS / SO / PO" />
+                    </group>
             </field>
         </record>
 
