@@ -32,6 +32,10 @@
                         widget="selection"
                         on_change="onchange_chart_template_id(chart_template_id)"
                         attrs="{'invisible': [('type', 'not in', ('associated'))]}"/>
+                    <field name="date_start"
+                        attrs="{'invisible': [('type', 'not in', ('associated'))]}"/>
+                    <field name="date_stop"
+                        attrs="{'invisible': [('type', 'not in', ('associated'))]}"/>
                     <field name="code_digits"
                         attrs="{'invisible': [('chart_template_id','=',False)]}"/>
                     <field name="sale_tax"
@@ -45,28 +49,31 @@
                         on_change="onchange_tax_rate(sale_tax_rate)"/>
                     <field name="purchase_tax_rate"
                         attrs="{'invisible': ['|', ('chart_template_id','=',False), ('complete_tax_set','=',True)]}"/>
+
                 </field>
                 <notebook position="inside">
                     <page string="Account Property" states="pending">
-                        <group attrs="{'invisible': [('type', 'not in', ('associated'))]}">
-                            <separator string="Journal Sequence" />
-                            <label string="Please change the sequences of the new journals" />
-                            <field name="journal_ids">
-                                <tree string="TODO">
-                                    <field name="name"/>
-                                    <field name="sequence_id"/>
-                                </tree>
-                            </field>
-                        </group>
+<!--                        <group attrs="{'invisible': [('type', 'not in', ('associated'))]}">-->
+<!--                            <separator string="Journal Sequence" />-->
+<!--                            <label string="Please change the sequences of the new journals" />-->
+<!--                            <field name="journal_ids">-->
+<!--                                <tree string="TODO">-->
+<!--                                    <field name="name"/>-->
+<!--                                    <field name="sequence_id"/>-->
+<!--                                </tree>-->
+<!--                            </field>-->
+<!--                        </group>-->
                         <group>
                             <field name="account_receivable_id"/>
                             <field name="account_payable_id"/>
-    <!--                            <field name="account_expense_categ"/>-->
-    <!--                            <field name="account_income_categ"/>-->
-    <!--                            <field name="stock_account_input"/>-->
-    <!--                            <field name="stock_account_output"/>-->
-    <!--                            <field name="stock_account_input_categ"/>-->
-    <!--                            <field name="stock_account_output_categ"/>-->
+                            <field name="category_line_ids" attrs="{'invisible': [('type', 'not in', ('associated'))]}" nolabel="1">
+                                <tree string="Product Categories" editable="top">
+                                    <field name="category_id"/>
+                                    <field name="company_id" invisible="1"/>
+                                    <field name="expense_account_id"/>
+                                    <field name="income_account_id"/>
+                                </tree>
+                            </field>
                         </group>
                     </page>
                 </notebook>

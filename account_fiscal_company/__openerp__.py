@@ -40,6 +40,13 @@ Features :
         * product_category / property_account_income_categ;
         * product_category / property_account_expense_categ;
 
+* Update the wizard of company creation:
+    * for associated company:
+        * Possibility to set the VAT number of the company;
+        * possiblity to select a chart account;
+        * delete some properties created by default, and give the possiblity to
+          create the good ones: property_receivable, property_payable;
+
 TODO:
 -----
     * Update the description of this module;

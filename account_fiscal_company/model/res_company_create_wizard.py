@@ -23,6 +23,8 @@
 from openerp.osv import fields
 from openerp.osv.orm import TransientModel
 
+import time
+
 
 class res_company_create_wizard(TransientModel):
     _inherit = 'res.company.create.wizard'
@@ -67,16 +69,34 @@ class res_company_create_wizard(TransientModel):
             'account.account', 'Account Payable',
             domain="[('company_id', '=', fiscal_company),"
             "('type', '=', 'payable')]"),
+        'date_start': fields.date(
+            'Start Date of Account Year'),
+        'date_stop': fields.date(
+            'Stop Date of Account Year'),
+        'category_line_ids': fields.one2many(
+            'res.company.create.wizard.category', 'wizard_id', 'Categories'),
     }
 
-    # account_payable
-    # account_expense_categ
-    # account_income_categ
-    # stock_account_input
-    # stock_account_output
-    # stock_account_input_categ
-    # stock_account_output_categ
-    # property_stock_journal
+    # Default Section
+    # Fields Function Section
+    def _default_category_line_ids(self, cr, uid, context=None):
+        res = []
+        pc_obj = self.pool['product.category']
+        pc_ids = pc_obj.search(cr, uid, [
+            ('parent_id', '=', False)], context=context)
+        for pc_id in pc_ids:
+            res.append((0, 0, {
+                'category_id': pc_id,
+                'income_account_id': False,
+                'expense_account_id': False,
+            }))
+        return res
+
+    _defaults = {
+        'date_start': lambda *a: time.strftime('%Y-%m-01'),
+        'date_stop': lambda *a: time.strftime('%Y-12-31'),
+        'category_line_ids': _default_category_line_ids,
+    }
 
     # Constraint Section
     def _check_account_setting(self, cr, uid, ids, context=None):
@@ -112,6 +132,8 @@ class res_company_create_wizard(TransientModel):
 
     def begin(self, cr, uid, id, context=None):
         imd_obj = self.pool['ir.model.data']
+        ip_obj = self.pool['ir.property']
+        afy_obj = self.pool['account.fiscalyear']
         res = super(res_company_create_wizard, self).begin(
             cr, uid, id, context=context)
         rccw = self.browse(cr, uid, id, context=context)
@@ -136,23 +158,53 @@ class res_company_create_wizard(TransientModel):
             }, context)
             wmca_obj.execute(cr, uid, [wmca_id], context)
 
-#                name = code = config.date_start[:4]
-#                if int(name) != int(config.date_stop[:4]):
-#                    name = config.date_start[:4] +'-'+ config.date_stop[:4]
-#                    code = config.date_start[2:4] +'-'+ config.date_stop[2:4]
-#                vals = {
-#                    'name': name,
-#                    'code': code,
-#                    'date_start': config.date_start,
-#                    'date_stop': config.date_stop,
-#                    'company_id': config.company_id.id,
-#                }
-#                fiscalyear_id = fiscalyear.create(
-# cr, uid, vals, context=context)
-#                if config.period == 'month':
-#                    fiscalyear.create_period(cr, uid, [fiscalyear_id])
-#                elif config.period == '3months':
-#                    fiscalyear.create_period3(cr, uid, [fiscalyear_id])
+            ip_payable_id = ip_obj.search(cr, uid, [
+                ('name', '=', 'property_account_payable'),
+                ('company_id', '=', rccw.company_id.id)],
+                context=context)
+            ip_payable = ip_obj.browse(
+                cr, uid, ip_payable_id[0], context=context)
+            ip_receivable_id = ip_obj.search(cr, uid, [
+                ('name', '=', 'property_account_receivable'),
+                ('company_id', '=', rccw.company_id.id)],
+                context=context)
+            ip_receivable = ip_obj.browse(
+                cr, uid, ip_receivable_id[0], context=context)
+            self.write(cr, uid, rccw.id, {
+                'account_receivable_id': ip_receivable.value_reference.id,
+                'account_payable_id': ip_payable.value_reference.id,
+            }, context=context)
+
+            # We drop some useless properties created by the function
+            # wizard_multi_charts_accounts::generate_properties
+            to_drop = [
+                'property_account_expense_categ',
+                'property_account_income_categ',
+                'property_account_expense',
+                'property_account_income',
+                'property_account_payable',
+                'property_account_receivable',
+            ]
+            ip_ids = ip_obj.search(cr, uid, [
+                ('name', 'in', to_drop),
+                ('company_id', '=', rccw.company_id.id)],
+                context=context)
+            ip_obj.unlink(cr, uid, ip_ids, context=context)
+
+            # Create Fiscal Year and Period
+            name = code = rccw.date_start[:4]
+            if int(name) != int(rccw.date_stop[:4]):
+                name = rccw.date_start[:4] + '-' + rccw.date_stop[:4]
+                code = rccw.date_start[-2:] + '-' + rccw.date_stop[-2:]
+            vals = {
+                'name': name,
+                'code': code,
+                'date_start': rccw.date_start,
+                'date_stop': rccw.date_stop,
+                'company_id': rccw.company_id.id,
+            }
+            afy_id = afy_obj.create(cr, uid, vals, context=context)
+            afy_obj.create_period(cr, uid, [afy_id], context=context)
 
         res.update({
             'payment_term_id': payment_term_id,
@@ -189,17 +241,19 @@ class res_company_create_wizard(TransientModel):
             'value_reference': 'account.account,%s' % (
                 rccw.account_payable_id.id),
         }, context=context)
-        # Create Account Property based on
-        # account_receivable
-        # account_payable
-        # account_expense_categ
-        # account_income_categ
-        # stock_account_input
-        # stock_account_output
-        # stock_account_input_categ
-        # stock_account_output_categ
-        # property_stock_journal
 
+        pc_obj = self.pool['product.category']
+        if rccw.type in ('associated'):
+            # create Expense / Income Properties
+            for category_line in rccw.category_line_ids:
+                expense_id = category_line.expense_account_id\
+                    and category_line.expense_account_id.id or False
+                income_id = category_line.income_account_id.id\
+                    and category_line.income_account_id.id or False
+                pc_obj.write(cr, uid, [category_line.category_id.id], {
+                    'property_account_expense_categ': expense_id,
+                    'property_account_income_categ': income_id,
+                    }, context=context)
         return res
 
     # View Section

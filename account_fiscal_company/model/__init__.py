@@ -28,4 +28,5 @@ from . import account_automatic_reconcile
 from . import product_product
 from . import product_category
 from . import res_company_create_wizard
+from . import res_company_create_wizard_category
 from . import res_company

@@ -165,6 +165,12 @@ class res_company_create_wizard(TransientModel):
             vals['fiscal_company'] = False
         rc_id = rc_obj.create(cr, uid, vals, context=context)
 
+        # Set Current User to the new company
+        ru_obj.write(cr, uid, [uid], {
+            'company_id': rc_id,
+            'company_ids': [(4, rc_id)],
+            }, context=context)
+
         # Manage Extra Data in Partner associated
         vals = {'customer': False}
         if rccw.type == 'integrated':
