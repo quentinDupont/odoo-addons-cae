@@ -51,6 +51,8 @@ TODO:
 -----
     * Update the description of this module;
     * Check the ir.model.access model
+    * Check if account_move_line code is usefull :possibility to
+      reconcile entries between differents fiscal companies (?!?)
 
 Copyright, Author and Licence :
 -------------------------------
