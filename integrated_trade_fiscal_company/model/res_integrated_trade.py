@@ -49,11 +49,12 @@ class ResIntegratedTrade(Model):
                 [
                     'customer_company_id',
                     'supplier_company_id',
-                ], 10)}, help="""If this field is checked, the integrated"""
-                    """ trade is realized between two fiscal child companies"""
-                    """ that have the same mother company. Special rules"""
-                    """ willbe applied.\n"""
-                    """ * VAT are deleted;"""
-                    """ * Sale and Purchase Accounts are updated using a"""
-                    """ transcoding table; """),
+                ], 10)},
+            help="""If this field is checked, the integrated"""
+            """ trade is realized between two fiscal child companies"""
+            """ that have the same mother company. Special rules"""
+            """ willbe applied.\n"""
+            """ * VAT are deleted;"""
+            """ * Sale and Purchase Accounts are updated using a"""
+            """ transcoding table; """),
     }
