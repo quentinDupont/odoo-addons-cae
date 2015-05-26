@@ -55,8 +55,6 @@ class StockPicking(Model):
                 raise except_osv(_('Error!'), _(
                     """ You can not invoice an internal Picking flaged as"""
                     """ Internal Trade."""))
-            print "customer_company_id %s" % customer_company_id
-            print "supplier_company_id %s" % supplier_company_id
             rit_id = rit_obj.search(cr, uid, [
                 ('customer_company_id', '=', customer_company_id),
                 ('supplier_company_id', '=', supplier_company_id),
