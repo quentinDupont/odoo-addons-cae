@@ -178,7 +178,7 @@ class res_company_create_wizard(TransientModel):
         else:
             vals['vat'] = rccw.vat
         rc = rc_obj.browse(cr, uid, rc_id, context=context)
-        rp_obj.write(cr, uid, rc.partner_id.id, vals, context=context)
+        rp_obj.write(cr, uid, [rc.partner_id.id], vals, context=context)
 
         # Create Generic User
         characters = string.ascii_letters + string.digits
