@@ -48,16 +48,16 @@ Copyright, Author and Licence :
     'license': 'AGPL-3',
     'depends': [
         'base_fiscal_company',
-#        'integrated_trade_base',
+        # 'integrated_trade_base',
         'stock',
         'account',
     ],
     'data': [
-#        'security/ir_rule.xml',
-#        'security/ir_model_access.yml',
-#        'view/view.xml',
-#        'view/action.xml',
-#        'view/menu.xml',
+        # 'security/ir_rule.xml',
+        # 'security/ir_model_access.yml',
+        # 'view/view.xml',
+        # 'view/action.xml',
+        # 'view/menu.xml',
     ],
     'auto_install': True,
 }
