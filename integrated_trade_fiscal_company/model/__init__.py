@@ -20,6 +20,6 @@
 #
 ##############################################################################
 
-from . import fiscal_company_transcoding_account
-from . import res_integrated_trade
-from . import stock_picking
+#from . import fiscal_company_transcoding_account
+#from . import res_integrated_trade
+#from . import stock_picking
