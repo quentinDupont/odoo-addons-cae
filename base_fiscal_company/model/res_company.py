@@ -23,6 +23,7 @@
 
 from lxml import etree
 
+from openerp import SUPERUSER_ID
 from openerp.osv import fields
 from openerp.osv.orm import Model
 
@@ -114,8 +115,11 @@ class res_company(Model):
         return res
 
     def create(self, cr, uid, vals, context=None):
+        # TODO: FIXME when trunk will be fixed.
+        # For the time being, it's not possible to create a company if
+        # the user is not SUPERUSER_ID
         res = super(res_company, self).create(
-            cr, uid, vals, context=context)
+            cr, SUPERUSER_ID, vals, context=context)
         if not vals.get('fiscal_company', False):
             self.write(cr, uid, [res], {
                 'fiscal_company': res}, context=context)
