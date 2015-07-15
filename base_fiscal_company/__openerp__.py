@@ -29,15 +29,21 @@
     'description': """
 Manage the concept of fiscal company
 ====================================
-Features :
-----------
-    * Add field 'fiscal_company' and 'fiscal_type' in the table res_company;
-    * A company can be 'normal', 'fiscal_mother' or 'fiscal_child' ;
-    * If a user has access rights to a 'fiscal_mother' so he has access"""
-    """rights to all 'fiscal_child' companies;
+Features
+--------
 
-Copyright, Author and Licence :
--------------------------------
+* Add field 'fiscal_company' and 'fiscal_type' in the table res_company;
+* A company can be 'normal', 'fiscal_mother' or 'fiscal_child' ;
+* If a user has access rights to a 'fiscal_mother' so he has access
+  rights to all 'fiscal_child' companies;
+
+Limits / Roadmaps / TODO
+------------------------
+* Created partner from users / companies, must be disabled by default.
+  (maybe create a new module for that feature)
+
+Copyright, Author and Licence
+-----------------------------
     * Copyright : 2013, Groupement Régional Alimentaire de Proximité;
     * Author :
         * Julien WESTE;
