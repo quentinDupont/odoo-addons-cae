@@ -51,13 +51,15 @@ class res_company(Model):
     # Columns Section
     _columns = {
         'fiscal_type': fields.selection(
-            _RES_COMPANY_FISCAL_TYPE, 'Fiscal Type', required=True),
+            _RES_COMPANY_FISCAL_TYPE,
+            string='Fiscal Type', required=True),
         'fiscal_company': fields.many2one(
             'res.company', 'Fiscal Company'),
         'fiscal_childs': fields.one2many(
-            'res.company', 'fiscal_company', 'Fiscal Childs', readonly=True),
+            'res.company', 'fiscal_company', string='Fiscal Childs',
+            readonly=True),
         'code': fields.char(
-            'Code', size=3,
+            string='Code', size=3,
             help="""This field is used as a prefix to generate automatic and"""
             """ unique reference for items (product, ...).\n"""
             """Warning, changing this value will change the reference of all"""
@@ -107,7 +109,7 @@ class res_company(Model):
             toolbar=toolbar)
         if view_type in ('form', 'tree')\
                 and 'code' in res['fields']:
-            res['fields']['required'] = True
+            res['fields']['code']['required'] = True
             doc = etree.XML(res['arch'])
             node = doc.xpath("//field[@name='code']")[0]
             node.set('modifiers', '{"required": true}')
