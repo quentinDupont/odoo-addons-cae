@@ -4,15 +4,34 @@
 
        <record model="account.account" id="chart0">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
-            <field name="code">CISX0</field>
+            <field name="code">CIS_ALL</field>
             <field name="name">CIS - Chart For Automated Tests</field>
             <field name="type">view</field>
             <field name="user_type" ref="account.data_account_type_view"/>
         </record>
 
+        <record model="account.account" id="bal">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CIS_1_5</field>
+            <field name="name">CIS - Balance Sheet - (test) </field>
+            <field name="parent_id" ref="chart0"/>
+            <field name="type">view</field>
+            <field name="user_type" ref="account.data_account_type_view"/>
+        </record>
+
+        <record model="account.account" id="assets_view">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CIS_1</field>
+            <field name="name">CIS - Assets - (test) </field>
+            <field name="parent_id" ref="chart0"/>
+            <field name="type">view</field>
+            <field name="user_type" ref="account.data_account_type_view"/>
+        </record>
+
+
         <record model="account.account" id="gpf">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
-            <field name="code">CISX2</field>
+            <field name="code">CIS_6_7</field>
             <field name="name">CIS - Profit and Loss - (test)</field>
             <field name="parent_id" ref="chart0"/>
             <field name="type">view</field>
@@ -22,7 +41,7 @@
         <!-- Income Part-->
         <record model="account.account" id="income_view">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
-            <field name="code">CISX20</field>
+            <field name="code">CIS_7</field>
             <field name="name">CIS - Income - (test)</field>
             <field name="parent_id" ref="gpf"/>
             <field name="type">view</field>
@@ -32,7 +51,7 @@
 
         <record model="account.account" id="rev">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
-            <field name="code">CISX200</field>
+            <field name="code">CIS_70</field>
             <field name="name">CIS - Revenue - (test)</field>
             <field name="parent_id" ref="income_view"/>
             <field name="type">view</field>
@@ -41,7 +60,7 @@
 
         <record model="account.account" id="a_sale">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
-            <field name="code">CISX2001</field>
+            <field name="code">CIS_701</field>
             <field name="name">CIS - Product Sales - (test)</field>
             <field name="parent_id" ref="rev"/>
             <field name="type">other</field>
@@ -51,7 +70,7 @@
         <!-- Expense Part-->
         <record model="account.account" id="expense_view">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
-            <field name="code">CISX21</field>
+            <field name="code">CIS_6</field>
             <field name="name">CIS - Expense - (test)</field>
             <field name="parent_id" ref="gpf"/>
             <field name="type">view</field>
@@ -61,7 +80,7 @@
 
         <record model="account.account" id="ovr">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
-            <field name="code">CISX211</field>
+            <field name="code">CIS_60</field>
             <field name="name">CIS - Overheads - (test)</field>
             <field name="parent_id" ref="expense_view"/>
             <field name="type">view</field>
@@ -70,7 +89,7 @@
 
         <record model="account.account" id="a_expense">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
-            <field name="code">CISX2110</field>
+            <field name="code">CIS_601</field>
             <field name="name">CIS - Expenses - (test)</field>
             <field name="parent_id" ref="ovr"/>
             <field name="type">other</field>

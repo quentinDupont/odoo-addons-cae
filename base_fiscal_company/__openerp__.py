@@ -65,6 +65,7 @@ Copyright, Author and Licence
     ],
     'demo': [
         'demo/demo.xml',
+        'demo/res_users.yml',
         'demo/res_groups.yml',
     ],
 }

@@ -23,7 +23,6 @@
 
 <!-- Model: res.company -->
         <record id="view_res_company_form" model="ir.ui.view">
-            <field name="name">res.company.form</field>
             <field name="model">res.company</field>
             <field name="inherit_id" ref="base.view_company_form"/>
             <field name="arch" type="xml">
@@ -42,7 +41,6 @@
 
 <!-- Model: res.company.create.wizard -->
         <record id="view_res_company_create_wizard_form" model="ir.ui.view">
-            <field name="name">Create a New Company</field>
             <field name="model">res.company.create.wizard</field>
             <field name="arch" type="xml">
                 <form string="Create a New Company" version="7.0">
