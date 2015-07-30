@@ -1,7 +1,7 @@
 # -*- encoding: utf-8 -*-
 ##############################################################################
 #
-#    Fiscal Company for Base Module for Odoo
+#    Integrated Trade - Account Fiscal Company module for Odoo
 #    Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 #    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
 #
@@ -20,15 +20,14 @@
 #
 ##############################################################################
 
-- !record {model: res.groups, id: base.group_sale_manager}:
-    users:
-        - base.user_root
-        - base_fiscal_company.user_accountant
-        - base_fiscal_company.user_worker
+- !record {model: account.journal, id: integrated_cis_journal_purchase}:
+    code: CIS_PURCHASE
+    name: CIS - Purchase Journal
+    type: purchase
+    company_id: base_fiscal_company.company_fiscal_mother
 
-- !record {model: res.groups, id: base.group_multi_company}:
-    users:
-        - base.user_root
-        - base_fiscal_company.user_accountant
-        # Make more readable test with demo data
-        - base_fiscal_company.user_worker
+- !record {model: account.journal, id: integrated_cis_journal_sale}:
+    code: CIS_SALE
+    name: CIS - Sale Journal
+    type: sale
+    company_id: base_fiscal_company.company_fiscal_mother

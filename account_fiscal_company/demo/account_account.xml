@@ -28,6 +28,33 @@
             <field name="user_type" ref="account.data_account_type_view"/>
         </record>
 
+        <record model="account.account" id="assets_receivable_payable">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CIS_4</field>
+            <field name="name">CIS - Receivable and Payable - (test) </field>
+            <field name="parent_id" ref="chart0"/>
+            <field name="type">view</field>
+            <field name="user_type" ref="account.data_account_type_view"/>
+        </record>
+
+        <record model="account.account" id="a_payable">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CIS_401</field>
+            <field name="name">CIS - Payable - (test) </field>
+            <field name="parent_id" ref="assets_receivable_payable"/>
+            <field name="type">payable</field>
+            <field name="user_type" ref="account.data_account_type_payable"/>
+        </record>
+
+        <record model="account.account" id="a_receivable">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CIS_411</field>
+            <field name="name">CIS - Receivable - (test) </field>
+            <field name="parent_id" ref="assets_receivable_payable"/>
+            <field name="type">receivable</field>
+            <field name="user_type" ref="account.data_account_type_payable"/>
+        </record>
+
 
         <record model="account.account" id="gpf">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>

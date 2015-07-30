@@ -81,6 +81,7 @@ Copyright, Author and Licence :
         'demo/account_fiscalyear.xml',
         'demo/account_period.xml',
         'demo/account_account.xml',
+        'demo/account_journal.yml',
         'demo/ir_property.xml',
     ],
     'auto_install': True,
