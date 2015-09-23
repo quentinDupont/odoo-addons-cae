@@ -95,7 +95,6 @@ class account_invoice(Model):
             self, cr, uid, ids, journal_id=False, context=None):
         res = super(account_invoice, self).onchange_journal_id(
             cr, uid, ids, journal_id=journal_id, context=context)
-        return True
         if res.get('value', False):
             res['value'].pop('company_id', False)
         return res
