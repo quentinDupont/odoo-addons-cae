@@ -34,8 +34,8 @@ class account_period(Model):
 
     @switch_company_period
     def find(self, cr, uid, dt=None, context=None):
-        return super(account_period, self).find(cr, uid, dt=dt,
-                                                context=context)
+        return super(account_period, self).find(
+            cr, uid, dt=dt, context=context)
 
 
 class account_fiscalyear(Model):
@@ -43,14 +43,12 @@ class account_fiscalyear(Model):
 
     @switch_company_period
     def find(self, cr, uid, dt=None, exception=True, context=None):
-        return super(account_fiscalyear, self)\
-            .find(cr, uid, dt=dt,
-                  exception=exception, context=context)
+        return super(account_fiscalyear, self).find(
+            cr, uid, dt=dt, exception=exception, context=context)
 
 
 class account_move(Model):
     _inherit = 'account.move'
-    _name = 'account.move'
 
     _columns = {
         'company_id': fields.many2one(
@@ -60,43 +58,44 @@ class account_move(Model):
 
 class account_journal(Model):
     _inherit = 'account.journal'
-    _name = 'account.journal'
 
     @switch_company
-    def search(self, cr, user, args, offset=0, limit=None, order=None,
-               context=None, count=False):
-        return super(account_journal, self)\
-            .search(cr, user, args,
-                    offset=offset, limit=limit, order=order,
-                    context=context, count=count)
+    def search(
+            self, cr, user, args, offset=0, limit=None, order=None,
+            context=None, count=False):
+        return super(account_journal, self).search(
+            cr, user, args, offset=offset, limit=limit, order=order,
+            context=context, count=count)
 
 
 class account_account(Model):
     _inherit = 'account.account'
-    _name = 'account.account'
 
     @switch_company
-    def search(self, cr, uid, args, offset=0, limit=None,
-               order=None, context=None, count=False):
-        return super(account_account, self)\
-            .search(cr, uid, args, offset=offset, limit=limit,
-                    order=order, context=context, count=count)
+    def search(
+            self, cr, uid, args, offset=0, limit=None,
+            order=None, context=None, count=False):
+        return super(account_account, self).search(
+            cr, uid, args, offset=offset, limit=limit, order=order,
+            context=context, count=count)
 
     @add_user_company
-    def compute(self, cr, uid, ids, field_names, arg=None, context=None,
-                query='', query_params=()):
-        return super(account_account, self)\
-            .__compute(cr, uid, ids=ids, field_names=field_names, arg=arg,
-                       context=context, query=query, query_params=query_params)
+    def compute(
+            self, cr, uid, ids, field_names, arg=None, context=None, query='',
+            query_params=()):
+        return super(account_account, self).__compute(
+            cr, uid, ids=ids, field_names=field_names, arg=arg,
+            context=context, query=query, query_params=query_params)
 
 
 class account_invoice(Model):
     _inherit = 'account.invoice'
-    _name = 'account.invoice'
 
     def onchange_journal_id(
             self, cr, uid, ids, journal_id=False, context=None):
-        result = super(account_invoice, self).onchange_journal_id(
+        res = super(account_invoice, self).onchange_journal_id(
             cr, uid, ids, journal_id=journal_id, context=context)
-        del result['value']['company_id']
         return True
+        if res.get('value', False):
+            res['value'].pop('company_id', False)
+        return res
