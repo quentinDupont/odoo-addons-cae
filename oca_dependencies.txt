@@ -1,1 +1,1 @@
-odoo-addons-it.git https://github.com/grap/odoo-addons-it.git 7.0
+odoo-addons-it https://github.com/grap/odoo-addons-it.git 7.0
