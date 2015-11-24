@@ -11,6 +11,8 @@ addons:
     packages:
       - expect-dev  # provides unbuffer utility
       - python-lxml # because pip installation is slow
+      - bzr
+      - wkhtmltopdf
 
 env:
   - VERSION="7.0" LINT_CHECK="1"
@@ -20,6 +22,11 @@ env:
 
 virtualenv:
   system_site_packages: true
+
+before_install:
+  - sudo pip install GitPython bzr
+  - sudo pip install cairosvg
+  - sudo pip install barcode    # FIXME bad version of barcode in pip
 
 install:
   - git clone https://github.com/oca/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
