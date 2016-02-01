@@ -70,6 +70,10 @@ class res_company_create_wizard(TransientModel):
             'company_id': rccw.company_id.id,
         }, context=context)
 
+        # TODO Set default value to
+        # location_id   stock.change.product.qty
+        # location_id   stock.fill.inventory
+        # location_id   stock.inventory.line
         sl_stock_id = sl_obj.create(cr, uid, {
             'name': _('%s - Stock') % (rccw.code),
             'usage': 'internal',
@@ -77,6 +81,7 @@ class res_company_create_wizard(TransientModel):
             'company_id': rccw.company_id.id,
         }, context=context)
 
+        # TODO Check if it's necessary ?!?
         sl_output_id = sl_obj.create(cr, uid, {
             'name': _('%s - Output') % (rccw.code),
             'usage': 'internal',
