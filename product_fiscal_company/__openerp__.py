@@ -1,24 +1,7 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Fiscal Company for Product Module for Odoo
-#    Copyright (C) 2014-Today GRAP (http://www.grap.coop)
-#    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright (C) 2014-Today: GRAP (http://www.grap.coop)
+# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
     'name': 'CIS - Product Fiscal Company',
@@ -29,27 +12,32 @@
 Glue Module between CIS and product
 ===================================
 
-Features:
----------
-    * company_id is now mandatory on product_product;
-    * user in mother company can see product of all child company;
-    * user in fiscal company can see but not update / delete product
-      of mother company;
-    * Add a field 'is_administrative' on product.product; if checked the
-      product will not be updatable by basic users;
+Features
+--------
 
-Creation Company Wizard:
-------------------------
-    * Create a Sale Pricelist and the associate property to
-      property_product_pricelist;
+* 'company_id' is now mandatory on 'product.product' model;
+* 'company_id' is now mandatory on 'product.pricelist' model;
 
-Technical Information:
-----------------------
-    * After installing this module, please fill correctly the field"""
-    """'company_id' in the table 'product_product';
+* user in mother company can see product of all child company;
+* user in fiscal company can see but not update / delete product
+  of mother company;
+* Add a field 'is_administrative' on product.product; if checked the
+  product will not be updatable by basic users;
 
-Copyright, Author and Licence :
--------------------------------
+Company Creation Wizard
+-----------------------
+
+* Create a Sale Pricelist and the according property to
+  property_product_pricelist;
+
+Technical Information
+---------------------
+
+* After installing this module, please fill correctly the new required
+  company_field;
+
+Copyright, Author and Licence
+-----------------------------
     * Copyright : 2014, Groupement Régional Alimentaire de Proximité;
     * Author :
         * Sylvain LE GAL (https://twitter.com/legalsylvain);
@@ -62,11 +50,19 @@ Copyright, Author and Licence :
         'product',
         'base_fiscal_company',
     ],
-    'init_xml': [],
-    'demo_xml': [],
-    'update_xml': [
+    'data': [
         'security/ir_rule.xml',
-        'view/view.xml',
+        'views/product_product_view.xml',
+        'views/product_category_view.xml',
+        'views/product_pricelist_view.xml',
+        'views/product_pricelist_version_view.xml',
+        'views/product_pricelist_item_view.xml',
+    ],
+    'demo': [
+        'demo/res_groups.yml',
+        'demo/product_pricelist.yml',
+        'demo/product_pricelist_version.yml',
+        'demo/product_product.yml',
     ],
     'auto_install': True,
 }
