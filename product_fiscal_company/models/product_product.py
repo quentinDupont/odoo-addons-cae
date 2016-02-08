@@ -39,11 +39,11 @@ class ProductProduct(Model):
         # Compute Suffix
         max_code = 0
         product_ids = self.search(cr, uid, [
-                ('default_code', 'like', prefix),
-                ('active', '=', 0),
-            ], limit=1, order='default_code desc', context=None) + \
+            ('default_code', 'like', prefix),
+            ('active', '=', 0),
+        ], limit=1, order='default_code desc', context=None) + \
             self.search(cr, uid, [
-                ('default_code', 'like', prefix)
+                ('default_code', 'like', prefix),
             ], limit=1, order='default_code desc', context=None)
 
         default_codes = [x['default_code'] for x in self.read(

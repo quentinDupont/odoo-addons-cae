@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
+@author:
+    Julien WESTE
+    Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<openerp><data>
+
+    <record id="view_res_company_form" model="ir.ui.view">
+        <field name="model">res.company</field>
+        <field name="inherit_id" ref="base.view_company_form"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="fiscal_type"/>
+                <field name="fiscal_company"/>
+                <field name="code"/>
+            </field>
+            <notebook position="inside">
+                <page string="Fiscal information">
+                    <field name="fiscal_childs" />
+                </page>
+            </notebook>
+        </field>
+    </record>
+
+</data></openerp>
+

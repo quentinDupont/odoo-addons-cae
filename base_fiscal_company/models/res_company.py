@@ -1,25 +1,9 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Fiscal Company for Base Module for Odoo
-#    Copyright (C) 2013-2014 GRAP (http://www.grap.coop)
-#    @author Julien WESTE
-#    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
+# -*- coding: utf-8 -*-
+# Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
+# @author:
+#    Julien WESTE
+#    Sylvain LE GAL (https://twitter.com/legalsylvain)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 from lxml import etree
 
@@ -28,7 +12,7 @@ from openerp.osv import fields
 from openerp.osv.orm import Model
 
 
-class res_company(Model):
+class ResCompany(Model):
     _inherit = 'res.company'
 
     _RES_COMPANY_FISCAL_TYPE = [
@@ -104,7 +88,7 @@ class res_company(Model):
             self, cr, uid, view_id=None, view_type='form', context=None,
             toolbar=False):
         """Add a required modifiers on the field code"""
-        res = super(res_company, self).fields_view_get(
+        res = super(ResCompany, self).fields_view_get(
             cr, uid, view_id=view_id, view_type=view_type, context=context,
             toolbar=toolbar)
         if view_type in ('form', 'tree')\
@@ -120,7 +104,7 @@ class res_company(Model):
         # TODO: FIXME when trunk will be fixed.
         # For the time being, it's not possible to create a company if
         # the user is not SUPERUSER_ID
-        res = super(res_company, self).create(
+        res = super(ResCompany, self).create(
             cr, SUPERUSER_ID, vals, context=context)
         if not vals.get('fiscal_company', False):
             self.write(cr, uid, [res], {
@@ -131,7 +115,7 @@ class res_company(Model):
         return res
 
     def write(self, cr, uid, ids, vals, context=None):
-        res = super(res_company, self).write(
+        res = super(ResCompany, self).write(
             cr, uid, ids, vals, context=context)
         if vals.get('fiscal_company', False):
             self._propagate_access_right(cr, uid, ids, context=context)
