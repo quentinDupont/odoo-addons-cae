@@ -28,7 +28,7 @@ class ProductTemplate(Model):
                 'base_fiscal_company.res_group_administrative_manager'):
             template_vals = self.read(
                 cr, uid, ids, ['administrative_ok'], context=context)
-            return any(x['administrative_ok'] for x in template_vals)
+            return not any(x['administrative_ok'] for x in template_vals)
         return True
 
     _constraints = [
