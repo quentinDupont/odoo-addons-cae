@@ -7,5 +7,7 @@
 - !record {model: product.product, id: administrative_product}:
     name: Global Administrative Product
     categ_id: product.product_category_all
+    uom_id: product.product_uom_unit
+    uom_po_id: product.product_uom_unit
     administrative_ok: True
     company_id: base_fiscal_company.company_fiscal_mother
