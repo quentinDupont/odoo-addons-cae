@@ -7,11 +7,8 @@
 
 
 from openerp.osv.orm import Model
-from openerp.osv import fields
 from openerp.addons.account_fiscal_company.decorator import \
-    switch_company, \
-    switch_company_period, \
-    add_user_company
+    switch_company_period
 
 
 class account_period(Model):

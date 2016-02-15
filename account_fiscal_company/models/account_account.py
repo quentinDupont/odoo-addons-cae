@@ -7,11 +7,10 @@
 
 
 from openerp.osv.orm import Model
-from openerp.osv import fields
 from openerp.addons.account_fiscal_company.decorator import \
     switch_company, \
-    switch_company_period, \
     add_user_company
+
 
 class account_account(Model):
     _inherit = 'account.account'
