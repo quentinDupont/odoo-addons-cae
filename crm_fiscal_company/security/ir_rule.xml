@@ -6,6 +6,12 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
 <openerp><data>
 
+    <record id="crm_lead_multicompany_rule" model="ir.rule">
+        <field name="name" >CRM Lead - Multi Company</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'crm.lead')]"/>
+        <field name="domain_force">['|', ('company_id','=',user.company_id.id), ('company_id','=',False)]</field>
+    </record>
+
     <record id="crm_case_categ_multicompany_rule" model="ir.rule">
         <field name="name" >CRM Case Category - Multi Company</field>
         <field model="ir.model" name="model_id" search="[('model', '=', u'crm.case.categ')]"/>
