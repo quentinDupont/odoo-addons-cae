@@ -34,6 +34,8 @@ class ResCompany(Model):
 
     # Columns Section
     _columns = {
+        'administrative_department_email': fields.char(
+            string='Administrative Department Email'),
         'fiscal_type': fields.selection(
             _RES_COMPANY_FISCAL_TYPE,
             string='Fiscal Type', required=True),

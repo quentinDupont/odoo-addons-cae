@@ -17,6 +17,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
                 <field name="fiscal_type"/>
                 <field name="fiscal_company"/>
                 <field name="code"/>
+                <field name="administrative_department_email" />
             </field>
             <notebook position="inside">
                 <page string="Fiscal information">

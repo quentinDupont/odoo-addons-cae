@@ -33,6 +33,7 @@
             <field name="name">Your Mother Company</field>
             <field name="company_id" eval="None"/>
             <field name="is_company" eval="True"/>
+            <field name="administrative_department_email">administrative@mother-company.com</field>
         </record>
 
         <record model="res.company" id="company_fiscal_mother">
