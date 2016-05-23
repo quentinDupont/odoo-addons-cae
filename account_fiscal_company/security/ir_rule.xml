@@ -72,5 +72,10 @@
             <field name="domain_force">['|',('company_id','=',user.company_id.fiscal_company.id),('company_id','=',False)]</field>
         </record>
 
+        <!-- account.fiscal.position -->
+        <record id="account.account_fiscal_position_comp_rule" model="ir.rule">
+            <field name="domain_force">['|','|',('company_id','=',user.company_id.id),('company_id','=',user.company_id.fiscal_company.id),('company_id','=',False)]</field>
+        </record>
+
     </data>
 </openerp>
