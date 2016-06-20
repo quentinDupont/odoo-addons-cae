@@ -25,6 +25,7 @@ Limits / Roadmaps / TODO
 ------------------------
 * Created partner from users / companies, must be disabled by default.
   (maybe create a new module for that feature)
+* Add a m2m fields on company to have the list of users.
 
 Copyright, Author and Licence
 -----------------------------
