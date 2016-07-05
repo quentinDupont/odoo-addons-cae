@@ -47,9 +47,8 @@ Copyright, Author and Licence :
         'base_fiscal_company',
         'l10n_fr',
     ],
-    'auto_install': True,
     'data': [
         'view/view.xml',
-    ]
-
+    ],
+    'installable': True,
 }

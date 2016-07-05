@@ -3,11 +3,10 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-from openerp.osv.orm import Model
-from openerp.osv import fields
+from openerp import models, fields, api
 
 
-class ProductProduct(Model):
+class ProductProduct(models.Model):
     _inherit = 'product.product'
 
     _DEFAULT_COMPANY_CODE = 'ZZZ'
@@ -15,21 +14,21 @@ class ProductProduct(Model):
     _CODE_TEMPLATE = '%(company_prefix)s-%(category_prefix)s-'
     _SUFFIX_LENGTH = 4
 
-    def _compute_default_code(
-            self, cr, uid, company_id, category_id, context=None):
+    @api.model
+    def _get_default_code_by_company_categ(self, company_id, category_id):
         """Return unique reference for a Product depending of company and
          category"""
-        company_obj = self.pool['res.company']
-        category_obj = self.pool['product.category']
+        company_obj = self.env['res.company']
+        category_obj = self.env['product.category']
 
         # Compute Prefix
         company_prefix = self._DEFAULT_COMPANY_CODE
         if company_id:
-            company = company_obj.browse(cr, uid, company_id, context=context)
+            company = company_obj.browse(company_id)
             company_prefix = company.code and company.code or company_prefix
 
         category_prefix = self._DEFAULT_CATEGORY_CODE
-        category = category_obj.browse(cr, uid, category_id, context=context)
+        category = category_obj.browse(category_id)
         category_prefix = category.code and category.code or category_prefix
 
         prefix = self._CODE_TEMPLATE % ({
@@ -38,108 +37,59 @@ class ProductProduct(Model):
 
         # Compute Suffix
         max_code = 0
-        product_ids = self.search(cr, uid, [
+        product_ids = self.env['product.product'].search([
             ('default_code', 'like', prefix),
             ('active', '=', 0),
-        ], limit=1, order='default_code desc', context=None) + \
-            self.search(cr, uid, [
+        ], limit=1, order='default_code desc').ids + \
+            self.search([
                 ('default_code', 'like', prefix),
-            ], limit=1, order='default_code desc', context=None)
+            ], limit=1, order='default_code desc').ids
 
-        default_codes = [x['default_code'] for x in self.read(
-            cr, uid, product_ids, ['default_code'], context=None)]
+        import pdb; pdb.set_trace()
+        default_codes = [x.default_code for x in
+            self.env['product.product'].browse(product_ids)]
         for default_code in default_codes:
             max_code = max(max_code, int(default_code[-self._SUFFIX_LENGTH:]))
 
         return {'prefix': prefix, 'max_code': max_code + 1}
 
     # Field Function Section
-    def _get_default_code(self, cr, uid, ids, field_name, arg, context=None):
+    @api.multi
+    @api.depends('company_id.code', 'categ_id.code')
+    def _compute_default_code(self):
         """Return unique reference for products, depending of company and
         category"""
-        res = {}
         prefixes = {}
 
-        for product_vals in self.read(
-                cr, uid, ids, ['company_id', 'categ_id'], context=None):
-            tmp = self._compute_default_code(
-                cr, uid, product_vals['company_id'], product_vals['categ_id'],
-                context=context)
+        for product in self:
+            tmp = self._get_default_code_by_company_categ(
+                product.company_id.id, product.categ_id.id)
             if not tmp["prefix"] in prefixes:
                 prefixes[tmp["prefix"]] = tmp["max_code"]
             else:
                 prefixes[tmp["prefix"]] += 1
-            res[product_vals['id']] = tmp["prefix"] +\
+            product.default_code = tmp["prefix"] +\
                 str(prefixes[tmp["prefix"]]).zfill(self._SUFFIX_LENGTH)
-        return res
 
     # Overload Section
-    def create(self, cr, uid, vals, context=None):
+    @api.model
+    def create(self, vals):
         """ special case where product is created by data.xml file and where
         no 'categ_id' is defined."""
-        model_obj = self.pool['ir.model.data']
 
         if not vals.get('categ_id', False):
-            vals['categ_id'] = model_obj.get_object(
-                cr, uid, 'product', 'product_category_all').id
-        tmp = self._compute_default_code(
-            cr, uid, vals.get('company_id', False), vals['categ_id'],
-            context=context)
+            vals['categ_id'] = self.env.ref('product.product_category_all').id
+        tmp = self._get_default_code_by_company_categ(
+            vals.get('company_id', False), vals['categ_id'])
         vals['default_code'] = tmp["prefix"] +\
             str(tmp["max_code"]).zfill(self._SUFFIX_LENGTH)
-        return super(ProductProduct, self).create(
-            cr, uid, vals, context=context)
+        return super(ProductProduct, self).create(vals)
 
-    # Changing default_code where changing category prefix
-    def _get_product_by_category(self, cr, uid, ids, context=None):
-        product_obj = self.pool['product.product']
+    # Overload Columns Section
+    default_code = fields.Char(compute='_compute_default_code', store=True)
 
-        product_ids = []
-        for category_id in ids:
-            product_ids += product_obj.search(cr, uid, [
-                ('categ_id', '=', category_id),
-                ('active', '=', 0),
-            ], context=context) +\
-                product_obj.search(cr, uid, [
-                    ('categ_id', '=', category_id),
-                ], context=None)
-        return product_ids
-
-    # Changing default_code where changing company prefix
-    def _get_product_by_company(self, cr, uid, ids, context=None):
-        product_obj = self.pool['product.product']
-
-        product_ids = []
-        for company_id in ids:
-            product_ids += product_obj.search(cr, uid, [
-                ('company_id', '=', company_id),
-                ('active', '=', 0),
-            ], context=None) +\
-                product_obj.search(cr, uid, [
-                    ('company_id', '=', company_id),
-                ], context=None)
-        return product_ids
-
-    # Columns Section
-    _columns = {
-        'default_code': fields.function(
-            _get_default_code, type='char', string='Reference', readonly=True,
-            store={
-                'res.company': (
-                    _get_product_by_company, ['code'], 10),
-                'product.category': (
-                    _get_product_by_category, ['code'], 10),
-                'product.product': (
-                    lambda self, cr, uid, ids, context=None: ids, [
-                        'company_id',
-                        'categ_id',
-                    ], 10)
-            }
-        ),
-    }
-
-    # Default Section
-    _defaults = {
-        'default_code': None,
-        'categ_id': None,
-    }
+#    # Default Section
+#    _defaults = {
+#        'default_code': None,
+#        'categ_id': None,
+#    }

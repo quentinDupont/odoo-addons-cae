@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2016-Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="calendar_event_multicompany_rule" model="ir.rule">
+        <field name="name" >Calendar Event - Multi Company</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'calendar.event')]"/>
+        <field name="domain_force">['|', ('company_id','=',user.company_id.id), ('company_id','=',False)]</field>
+    </record>
+
+</data></openerp>

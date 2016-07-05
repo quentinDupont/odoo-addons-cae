@@ -1,40 +1,14 @@
 # -*- coding: utf-8 -*-
 # Copyright (C) 2013-Today: GRAP (http://www.grap.coop)
-# @author:
-#    Julien WESTE
-#    Sylvain LE GAL (https://twitter.com/legalsylvain)
+# @author: Julien WESTE
+# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 {
-    'name': 'CIS - Base Fiscal Company',
-    'version': '1.0',
-    'category': 'CIS',
-    'summary': 'Manage the concept of fiscal company',
-    'description': """
-Manage the concept of fiscal company
-====================================
-Features
---------
-
-* Add field 'fiscal_company' and 'fiscal_type' in the table res_company;
-* A company can be 'normal', 'fiscal_mother' or 'fiscal_child' ;
-* If a user has access rights to a 'fiscal_mother' so he has access
-  rights to all 'fiscal_child' companies;
-
-Limits / Roadmaps / TODO
-------------------------
-* Created partner from users / companies, must be disabled by default.
-  (maybe create a new module for that feature)
-* Add a m2m fields on company to have the list of users.
-
-Copyright, Author and Licence
------------------------------
-    * Copyright : 2013, Groupement Régional Alimentaire de Proximité;
-    * Author :
-        * Julien WESTE;
-        * Sylvain LE GAL (https://twitter.com/legalsylvain);
-    * Licence : AGPL-3 (http://www.gnu.org/licenses/)
-    """,
+    'name': 'CAE - Base Module',
+    'version': '8.0.1.0.0',
+    'category': 'CAE',
+    'summary': 'Manage Cooperatives of Activities and Employment',
     'author': 'GRAP',
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
@@ -46,13 +20,14 @@ Copyright, Author and Licence
         'security/res_groups.yml',
         'views/action.xml',
         'views/menu.xml',
-        'views/res_partner_view.xml',
-        'views/res_company_view.xml',
-        'views/res_company_create_wizard_view.xml',
+        'views/view_res_users.xml',
+        'views/view_res_partner.xml',
+        'views/view_res_company.xml',
+        'views/view_res_company_create_wizard.xml',
     ],
     'demo': [
-        'demo/demo.xml',
-        'demo/res_users.yml',
-        'demo/res_groups.yml',
+        'demo/res_partner_company.xml',
+        'demo/res_partner_users.xml',
     ],
+    'installable': True,
 }

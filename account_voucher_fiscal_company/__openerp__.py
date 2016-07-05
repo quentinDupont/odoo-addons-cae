@@ -51,5 +51,5 @@ Copyright, Author and Licence :
         'base_fiscal_company',
         'account_voucher',
     ],
-    'auto_install': True,
+    'installable': True,
 }

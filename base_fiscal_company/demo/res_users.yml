@@ -20,9 +20,9 @@
 #
 ##############################################################################
 
-- !record {model: res.users, id: base.user_root}:
-    company_ids:
-        - company_fiscal_child_1
-        - company_fiscal_child_2
-        - company_fiscal_mother
-        - base.main_company
+#- !record {model: res.users, id: base.user_root}:
+#    company_ids:
+#        - company_fiscal_child_1
+#        - company_fiscal_child_2
+#        - company_fiscal_mother
+#        - base.main_company

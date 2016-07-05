@@ -3,20 +3,15 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-
-from openerp.osv.orm import Model
-from openerp.osv import fields
+from openerp import models, fields
 
 
-class crm_case_stage(Model):
+class CrmCaseStage(models.Model):
     _inherit = 'crm.case.stage'
 
-    _columns = {
-        'company_id': fields.many2one(
-            'res.company', string='Company'),
-    }
+    def _default_company_id(self):
+        return self.env['res.company'].browse(self.env.user._get_company())
 
-    _defaults = {
-        'company_id': lambda s, cr, uid, c: (
-            s.pool.get('res.users')._get_company(cr, uid, context=c)),
-    }
+    company_id = fields.Many2one(
+        comodel_name='res.company', string='Company', readonly=True,
+        default=_default_company_id)

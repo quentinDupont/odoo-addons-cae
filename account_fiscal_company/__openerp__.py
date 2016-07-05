@@ -84,5 +84,5 @@ Copyright, Author and Licence :
         'demo/account_journal.yml',
         'demo/ir_property.xml',
     ],
-    'auto_install': True,
+    'installable': True,
 }

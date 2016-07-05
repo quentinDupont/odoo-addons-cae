@@ -22,11 +22,12 @@
 ##############################################################################
 
 import time
-import netsvc
-import tools
+
+from openerp import tools
+from openerp import netsvc
 from openerp.osv.orm import Model
 from openerp.osv import fields, osv
-from tools.translate import _
+from openerp.tools.translate import _
 
 
 class account_move_line(Model):

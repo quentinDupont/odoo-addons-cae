@@ -50,5 +50,5 @@ Copyright, Author and Licence :
     'data': [
         'security/ir_rule.xml',
     ],
-    'auto_install': True,
+    'installable': True,
 }

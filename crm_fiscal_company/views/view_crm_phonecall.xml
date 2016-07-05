@@ -4,6 +4,7 @@ Copyright (C) 2016-Today: GRAP (http://www.grap.coop)
 @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 -->
+
 <openerp><data>
 
     <record id="view_crm_phonecall_tree" model="ir.ui.view">
@@ -11,7 +12,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="inherit_id" ref="crm.crm_case_inbound_phone_tree_view"/>
         <field name="arch" type="xml">
             <field name="opportunity_id" position="after">
-                <field name="company_id" groups="base.group_multi_company" readonly="1"/>
+                <field name="company_id" groups="base.group_multi_company"/>
             </field>
         </field>
     </record>
@@ -23,19 +24,18 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
             <field name="state" position="after">
                 <field name="company_id" groups="base.group_multi_company"/>
             </field>
-            <xpath expr="//filter[@string='Date']" position="after">
-                <filter string="Company" groups="base.group_multi_company" context="{'group_by':'company_id'}" readonly="1"/>
+            <xpath expr="//filter[@string='Partner']" position="after">
+                <filter string="Company" groups="base.group_multi_company" context="{'group_by':'company_id'}"/>
             </xpath>
         </field>
     </record>
-
 
     <record id="view_crm_phonecall_form" model="ir.ui.view">
         <field name="model">crm.phonecall</field>
         <field name="inherit_id" ref="crm.crm_case_phone_form_view"/>
         <field name="arch" type="xml">
             <field name="section_id" position="after">
-                <field name="company_id" groups="base.group_multi_company" readonly="1"/>
+                <field name="company_id" groups="base.group_multi_company"/>
             </field>
         </field>
     </record>

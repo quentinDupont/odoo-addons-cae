@@ -3,14 +3,15 @@
 # @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
+from openerp import models, fields
 
-from openerp.osv.orm import Model
 
-
-class crm_phonecall(Model):
+class CrmPhonecall(models.Model):
     _inherit = 'crm.phonecall'
 
-    _defaults = {
-        'company_id': lambda s, cr, uid, c: (
-            s.pool.get('res.users')._get_company(cr, uid, context=c)),
-    }
+    def _default_company_id(self):
+        return self.env['res.company'].browse(self.env.user._get_company())
+
+    company_id = fields.Many2one(
+        comodel_name='res.company', string='Company', readonly=True,
+        default=_default_company_id)

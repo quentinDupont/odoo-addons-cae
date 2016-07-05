@@ -49,5 +49,5 @@ Copyright, Author and Licence :
         'base_fiscal_company',
         'sale',
     ],
-    'auto_install': True,
+    'installable': True,
 }

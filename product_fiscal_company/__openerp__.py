@@ -64,5 +64,5 @@ Copyright, Author and Licence
         'demo/product_pricelist_version.yml',
         'demo/product_product.yml',
     ],
-    'auto_install': True,
+    'installable': True,
 }

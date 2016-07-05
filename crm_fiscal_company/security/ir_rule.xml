@@ -18,15 +18,15 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="domain_force">['|', ('company_id','=',user.company_id.id), ('company_id','=',False)]</field>
     </record>
 
-    <record id="crm_case_channel_multicompany_rule" model="ir.rule">
-        <field name="name" >CRM Case Channel - Multi Company</field>
-        <field model="ir.model" name="model_id" search="[('model', '=', u'crm.case.channel')]"/>
+    <record id="crm_tracking_medium_multicompany_rule" model="ir.rule">
+        <field name="name" >CRM Tracking Medium - Multi Company</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'crm.tracking.medium')]"/>
         <field name="domain_force">['|', ('company_id','=',user.company_id.id), ('company_id','=',False)]</field>
     </record>
 
-    <record id="crm_case_resource_type_multicompany_rule" model="ir.rule">
-        <field name="name" >CRM Case Resource Type - Multi Company</field>
-        <field model="ir.model" name="model_id" search="[('model', '=', u'crm.case.resource.type')]"/>
+    <record id="crm_tracking_campaign_multicompany_rule" model="ir.rule">
+        <field name="name" >CRM Tracking Campaign - Multi Company</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'crm.tracking.campaign')]"/>
         <field name="domain_force">['|', ('company_id','=',user.company_id.id), ('company_id','=',False)]</field>
     </record>
 
