@@ -5,7 +5,7 @@
 
 {
     'name': 'CIS - Product Fiscal Company',
-    'version': '1.0',
+    'version': '8.0.3.0.0',
     'category': 'CIS',
     'summary': 'Glue Module between CIS and product',
     'description': """
@@ -52,8 +52,9 @@ Copyright, Author and Licence
     ],
     'data': [
         'security/ir_rule.xml',
+        'data/ir_sequence_type.xml',
+        'views/view_product_template.xml',
         'views/product_product_view.xml',
-        'views/product_category_view.xml',
         'views/product_pricelist_view.xml',
         'views/product_pricelist_version_view.xml',
         'views/product_pricelist_item_view.xml',

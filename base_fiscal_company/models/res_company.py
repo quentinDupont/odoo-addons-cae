@@ -10,6 +10,8 @@ from openerp import SUPERUSER_ID
 from openerp.osv import fields
 from openerp.osv.orm import Model
 
+_DEFAULT_COMPANY_CODE = 'ZZZ'
+
 
 class ResCompany(Model):
     _inherit = 'res.company'
@@ -53,6 +55,7 @@ class ResCompany(Model):
     }
 
     _defaults = {
+        'code': _DEFAULT_COMPANY_CODE,
         'fiscal_type': 'normal',
     }
 
