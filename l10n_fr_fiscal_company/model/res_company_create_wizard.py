@@ -42,7 +42,8 @@ class res_company_create_wizard(TransientModel):
             cr, uid, ids, type, mother_company, context=context)
         if type and mother_company and type == 'integrated':
             rc = rc_obj.browse(cr, uid, mother_company, context=context)
-            res['value']['siret'] = rc.siret + ' XX'
+            if rc.siret:
+                res['value']['siret'] = rc.siret + ' XX'
         else:
             res['value']['siret'] = ''
         return res
