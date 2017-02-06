@@ -5,7 +5,7 @@
 
 {
     'name': 'CIS - Product Fiscal Company',
-    'version': '8.0.3.0.0',
+    'version': '8.0.5.0.0',
     'category': 'CIS',
     'summary': 'Glue Module between CIS and product',
     'description': """
@@ -47,6 +47,7 @@ Copyright, Author and Licence
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
     'depends': [
+        'base',
         'product',
         'base_fiscal_company',
     ],
@@ -64,6 +65,7 @@ Copyright, Author and Licence
         'demo/product_pricelist.yml',
         'demo/product_pricelist_version.yml',
         'demo/product_product.yml',
+        'demo/function.xml',
     ],
     'installable': True,
 }
