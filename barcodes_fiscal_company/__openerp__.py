@@ -43,4 +43,5 @@ Copyright, Author and Licence
         'views/view_barcode_rule.xml',
     ],
     'auto_install': True,
+    'installable': False,
 }

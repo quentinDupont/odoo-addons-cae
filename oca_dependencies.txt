@@ -1,2 +1,0 @@
-odoo-addons-it https://github.com/grap/odoo-addons-it.git 7.0
-pos https://github.com/grap/pos.git 7.0_BACKPORT_barcodes
