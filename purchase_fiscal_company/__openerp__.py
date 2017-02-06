@@ -47,7 +47,7 @@ Copyright, Author and Licence :
     'license': 'AGPL-3',
     'depends': [
         'base_fiscal_company',
-        'sale',
+        'purchase',
     ],
     'installable': True,
 }
