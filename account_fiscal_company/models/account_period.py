@@ -5,16 +5,14 @@
 #    Sylvain LE GAL (https://twitter.com/legalsylvain)
 # License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
-
-from openerp.osv.orm import Model
-from openerp.addons.account_fiscal_company.decorator import \
-    switch_company_period
+from openerp import api, models
+from ..decorator import new_api_switch_company_period
 
 
-class account_period(Model):
+class AccountPeriod(models.Model):
     _inherit = 'account.period'
 
-    @switch_company_period
-    def find(self, cr, uid, dt=None, context=None):
-        return super(account_period, self).find(
-            cr, uid, dt=dt, context=context)
+    @api.model
+    @new_api_switch_company_period
+    def find(self, dt=None):
+        return super(AccountPeriod, self).find(dt=dt)
