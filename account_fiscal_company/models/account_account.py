@@ -19,7 +19,6 @@ class account_account(Model):
     def search(
             self, cr, uid, args, offset=0, limit=None,
             order=None, context=None, count=False):
-        print ">>>>>>>>>>>>> SEARCH"
         return super(account_account, self).search(
             cr, uid, args, offset=offset, limit=limit, order=order,
             context=context, count=count)
@@ -28,7 +27,6 @@ class account_account(Model):
     def compute(
             self, cr, uid, ids, field_names, arg=None, context=None, query='',
             query_params=()):
-        print ">>>>>>>>>>>>> compute"
         return super(account_account, self).__compute(
             cr, uid, ids=ids, field_names=field_names, arg=arg,
             context=context, query=query, query_params=query_params)

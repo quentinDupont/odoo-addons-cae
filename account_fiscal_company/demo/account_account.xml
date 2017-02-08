@@ -13,7 +13,7 @@
         <record model="account.account" id="bal">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
             <field name="code">CIS_1_5</field>
-            <field name="name">CIS - Balance Sheet - (test) </field>
+            <field name="name">CIS - Balance Sheet View - (test) </field>
             <field name="parent_id" ref="chart0"/>
             <field name="type">view</field>
             <field name="user_type" ref="account.data_account_type_view"/>
@@ -22,8 +22,8 @@
         <record model="account.account" id="assets_view">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
             <field name="code">CIS_1</field>
-            <field name="name">CIS - Assets - (test) </field>
-            <field name="parent_id" ref="chart0"/>
+            <field name="name">CIS - Assets View - (test) </field>
+            <field name="parent_id" ref="bal"/>
             <field name="type">view</field>
             <field name="user_type" ref="account.data_account_type_view"/>
         </record>
@@ -32,7 +32,7 @@
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
             <field name="code">CIS_4</field>
             <field name="name">CIS - Receivable and Payable - (test) </field>
-            <field name="parent_id" ref="chart0"/>
+            <field name="parent_id" ref="bal"/>
             <field name="type">view</field>
             <field name="user_type" ref="account.data_account_type_view"/>
         </record>
@@ -44,6 +44,7 @@
             <field name="parent_id" ref="assets_receivable_payable"/>
             <field name="type">payable</field>
             <field name="user_type" ref="account.data_account_type_payable"/>
+            <field name="reconcile" eval="True" />
         </record>
 
         <record model="account.account" id="a_receivable">
@@ -53,8 +54,37 @@
             <field name="parent_id" ref="assets_receivable_payable"/>
             <field name="type">receivable</field>
             <field name="user_type" ref="account.data_account_type_payable"/>
+            <field name="reconcile" eval="True" />
         </record>
 
+        <!-- Bank and Cash Part -->
+        <record model="account.account" id="bank_cash_view">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CIS_5</field>
+            <field name="name">CIS - Bank and Cash View - (test)</field>
+            <field name="parent_id" ref="bal"/>
+            <field name="type">view</field>
+            <field name="user_type" ref="account.data_account_type_view"/>
+            <field name="reconcile" eval="False"/>
+        </record>
+
+        <record model="account.account" id="bank_account">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CIS_512</field>
+            <field name="name">CIS - Bank - (test)</field>
+            <field name="parent_id" ref="bank_cash_view"/>
+            <field name="type">liquidity</field>
+            <field name="user_type" ref="account.data_account_type_bank"/>
+        </record>
+
+        <record model="account.account" id="cash_account">
+            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
+            <field name="code">CIS_581</field>
+            <field name="name">CIS - Cash - (test)</field>
+            <field name="parent_id" ref="bank_cash_view"/>
+            <field name="type">liquidity</field>
+            <field name="user_type" ref="account.data_account_type_cash"/>
+        </record>
 
         <record model="account.account" id="gpf">
             <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>
