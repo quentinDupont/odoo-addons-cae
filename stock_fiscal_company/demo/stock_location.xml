@@ -1,0 +1,25 @@
+<?xml version="1.0" ?>
+<openerp><data>
+
+    <record id="stock_location_physical_CH1" model="stock.location">
+        <field name="name">CH1 - Physical Location</field>
+        <field name="location_id" ref="stock.stock_location_locations"/>
+        <field name="usage">view</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+    </record>
+
+    <record id="stock_location_stock_CH1" model="stock.location">
+        <field name="name">CH1 - Stock Location</field>
+        <field name="location_id" ref="stock_location_physical_CH1"/>
+        <field name="usage">internal</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+    </record>
+
+    <record id="stock_location_customer_CH1" model="stock.location">
+        <field name="name">CH1 - Customer Location</field>
+        <field name="location_id" ref="stock.stock_location_customers"/>
+        <field name="usage">customer</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+    </record>
+
+</data></openerp>

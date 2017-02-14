@@ -1,0 +1,11 @@
+<?xml version="1.0" ?>
+<openerp><data>
+
+    <record id="ir_sequence_picking_type_pos_CH1" model="ir.sequence">
+        <field name="name">CH1 - Picking POS</field>
+        <field name="prefix">CH1/PICK/POS/</field>
+        <field name="padding">5</field>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+    </record>
+
+</data></openerp>
