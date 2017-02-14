@@ -17,8 +17,8 @@ class PosOrder(models.Model):
         if len(self):
             res = super(PosOrder, self.with_context(
                 force_company=self[0].company_id.id)).\
-                    _create_account_move_line(
-                        session=session, move_id=move_id)
+                _create_account_move_line(
+                    session=session, move_id=move_id)
         else:
             res = super(PosOrder, self)._create_account_move_line(
                 session=session, move_id=move_id)

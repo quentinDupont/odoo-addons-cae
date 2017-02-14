@@ -5,30 +5,16 @@
 
 from lxml import etree
 
-from openerp import _, api, fields, models
-from openerp.exceptions import Warning
+from openerp import api, fields, models
 
 
 class StockPickingType(models.Model):
     _inherit = 'stock.picking.type'
 
-#    # Default Section
-#    def _default_company_id(self):
-#        return self.env['res.company'].browse(self.env.user._get_company())
-
     # Column Section
     company_id = fields.Many2one(
         comodel_name='res.company', string='Company',
         store=True, related='warehouse_id.company_id')
-
-#    # Constrains Section
-#    @api.one
-#    @api.constrains('company_id', 'warehouse_id')
-#    def _check_warehouse_company(self):
-#        if self.company_id and self.warehouse_id:
-#            if self.company_id != self.warehouse_id.company_id:
-#                raise Warning(_(
-#                    "Warehouse should belong to the defined company."))
 
     # Overload Section
     @api.model
