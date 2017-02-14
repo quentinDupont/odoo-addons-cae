@@ -45,10 +45,20 @@ Copyright, Author and Licence :
     'license': 'AGPL-3',
     'depends': [
         'base_fiscal_company',
+        'account_voucher_fiscal_company',
+        'product_fiscal_company',
         'point_of_sale',
     ],
     'data': [
         'security/ir_rule.xml',
+        'views/view_pos_config.xml',
+    ],
+    'demo': [
+        'demo/ir_sequence.xml',
+        'demo/stock_picking_type.xml',
+        'demo/pos_config.xml',
+        'demo/product_product.yml',
     ],
     'installable': True,
+    'auto_install': True,
 }

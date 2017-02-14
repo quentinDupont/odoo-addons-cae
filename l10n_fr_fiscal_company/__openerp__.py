@@ -51,4 +51,5 @@ Copyright, Author and Licence :
         'view/view.xml',
     ],
     'installable': True,
+    'auto_install': True,
 }

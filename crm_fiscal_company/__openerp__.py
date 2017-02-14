@@ -12,7 +12,7 @@
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
     'depends': [
-        'sales_team_fiscal_company',
+        'base_fiscal_company',
         'crm',
     ],
     'data': [
@@ -24,4 +24,5 @@
         'security/ir_rule.xml',
     ],
     'installable': True,
+    'auto_install': True,
 }

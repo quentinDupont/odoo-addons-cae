@@ -47,9 +47,8 @@ Copyright, Author and Licence
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
     'depends': [
-        'base',
-        'product',
         'base_fiscal_company',
+        'product',
     ],
     'data': [
         'security/ir_rule.xml',
@@ -62,10 +61,12 @@ Copyright, Author and Licence
     ],
     'demo': [
         'demo/res_groups.yml',
+        'demo/product_pricelist.xml',
         'demo/product_pricelist.yml',
         'demo/product_pricelist_version.yml',
         'demo/product_product.yml',
         'demo/function.xml',
     ],
     'installable': True,
+    'auto_install': True,
 }

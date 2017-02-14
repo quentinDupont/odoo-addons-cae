@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<openerp>
-    <data>
+<openerp><data>
+
+    <record forcecreate="True" id="property_account_receivable_CH1" model="ir.property">
+        <field name="name">property_account_receivable CH1</field>
+        <field name="fields_id" search="[('model','=','res.partner'),('name','=','property_account_receivable')]"/>
+        <field eval="'account.account,'+str(a_receivable)" name="value"/>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+    </record>
+    <record forcecreate="True" id="property_account_payable_CH1" model="ir.property">
+        <field name="name">property_account_payable CH1</field>
+        <field name="fields_id" search="[('model','=','res.partner'),('name','=','property_account_payable')]"/>
+        <field eval="'account.account,'+str(a_payable)" name="value"/>
+        <field name="company_id" ref="base_fiscal_company.company_fiscal_child_1"/>
+    </record>
 
 <!--        <record model="ir.property" id="property_account_expense_category_mother">-->
 <!--            <field name="company_id" ref="base_fiscal_company.company_fiscal_mother"/>-->

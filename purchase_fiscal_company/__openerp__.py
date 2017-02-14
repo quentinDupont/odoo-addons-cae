@@ -50,4 +50,5 @@ Copyright, Author and Licence :
         'purchase',
     ],
     'installable': True,
+    'auto_install': True,
 }

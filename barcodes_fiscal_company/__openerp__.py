@@ -42,6 +42,6 @@ Copyright, Author and Licence
         'views/view_barcode_nomenclature.xml',
         'views/view_barcode_rule.xml',
     ],
-    'auto_install': True,
     'installable': True,
+    'auto_install': True,
 }

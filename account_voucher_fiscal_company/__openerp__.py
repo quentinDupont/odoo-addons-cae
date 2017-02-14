@@ -48,11 +48,12 @@ Copyright, Author and Licence :
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
     'depends': [
-        'account_fiscal_company',
+        'base_fiscal_company',
         'account_voucher',
     ],
     'demo': [
         'demo/account_journal.yml',
     ],
     'installable': True,
+    'auto_install': True,
 }

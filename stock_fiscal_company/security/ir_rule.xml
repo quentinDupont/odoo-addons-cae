@@ -19,10 +19,14 @@
 <!--along with this program.  If not, see <http://www.gnu.org/licenses/>.   -->
 <!-- ********************************************************************** -->
 
-<openerp>
-    <data>
-        <record id="stock.stock_location_comp_rule" model="ir.rule">
-            <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',user.company_id.id)]</field>
-        </record>
-    </data>
-</openerp>
+<openerp><data>
+
+    <record id="stock.stock_location_comp_rule" model="ir.rule">
+        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',user.company_id.id)]</field>
+    </record>
+
+    <record id="stock.stock_picking_type_rule" model="ir.rule">
+        <field name="domain_force">['|',('company_id','=',False),('company_id','child_of',user.company_id.id)]</field>
+    </record>
+
+</data></openerp>

@@ -49,12 +49,19 @@ Copyright, Author and Licence :
     'website': 'http://www.grap.coop',
     'license': 'AGPL-3',
     'depends': [
+        'base_fiscal_company',
         'account_fiscal_company',
         'stock',
+    ],
+    'demo': [
+        'demo/stock_location.xml',
+        'demo/stock_warehouse.xml',
     ],
     'data': [
         'security/ir_rule.xml',
         'view/view.xml',
+        'view/view_stock_picking_type.xml',
     ],
-    'installable': False,
+    'installable': True,
+    'auto_install': True,
 }

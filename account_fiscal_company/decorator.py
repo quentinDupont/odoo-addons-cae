@@ -72,6 +72,25 @@ def switch_company(func):
     return wrapper
 
 
+def switch_company_period(func):
+    @functools.wraps(func)
+    def wrapper(self, cr, uid, *args, **kwargs):
+        context = kwargs.get('context', {})
+        if context is None:
+            context = {}
+        c = context.copy()
+        if context.get('company_id', False):
+            c['company_id'] = self.pool.get("res.company").browse(
+                cr, uid, context['company_id']).fiscal_company.id
+        else:
+            c['company_id'] = self.pool.get('res.users').browse(
+                cr, uid, uid, context=context).company_id.fiscal_company.id
+        kwargs['context'] = c
+        response = func(self, cr, uid, *args, **kwargs)
+        return response
+    return wrapper
+
+
 def new_api_switch_company_period(func):
     """Decorator
         Replace the company_id of the context, by

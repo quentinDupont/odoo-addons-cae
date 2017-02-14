@@ -85,4 +85,5 @@ Copyright, Author and Licence :
         'demo/ir_property.xml',
     ],
     'installable': True,
+    'auto_install': True,
 }
