@@ -1,5 +1,5 @@
-[![Build Status](https://travis-ci.org/grap/odoo-addons-cis.svg?branch=7.0)](https://travis-ci.org/grap/odoo-addons-cis)
-[![Coverage Status](https://coveralls.io/repos/github/grap/odoo-addons-cis/badge.svg?branch=7.0)](https://coveralls.io/github/grap/odoo-addons-cis?branch=7.0)
+[![Build Status](https://travis-ci.org/grap/odoo-addons-cis.svg?branch=8.0)](https://travis-ci.org/grap/odoo-addons-cis)
+[![Coverage Status](https://coveralls.io/repos/github/grap/odoo-addons-cis/badge.svg?branch=8.0)](https://coveralls.io/github/grap/odoo-addons-cis?branch=8.0)
 
 odoo-addons-cis
 ==================
