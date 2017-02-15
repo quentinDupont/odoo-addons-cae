@@ -7,7 +7,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 
 <openerp><data>
 
- Updating base.user_root 
+<!-- Updating base.user_root -->
         <record model="res.users" id="base.user_root">
             <field name="groups_id" eval="[
                 (4, ref('base.group_multi_company')),
@@ -21,7 +21,7 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
                 (4, ref('company_fiscal_child_2'))]"/>
         </record>
 
- Create user associated to all companies and partner associated 
+<!-- Create user associated to all companies and partner associated -->
     <record model="res.partner" id="partner_accountant">
         <field name="name">Accountant User</field>
         <field name="company_id" eval="False"/>

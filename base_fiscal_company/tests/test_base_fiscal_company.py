@@ -32,19 +32,19 @@ class TestBaseFiscalCompany(TransactionCase):
         """ Tests are failing on a database with 'mail' module installed,
         Because the load of the registry in TransactionCase seems to be bad.
         To be sure, run "print self.registry('res.partner')._defaults and see
-        that the mandatory field 'notification_email_send' doesn't appear.
+        that the mandatory field 'notify_email' doesn't appear.
         So this is a monkey patch that drop and add not null constraint
         to make that tests working."""
         self.cr.execute("""
             SELECT A.ATTNAME
                 FROM PG_ATTRIBUTE A, PG_CLASS C
                 WHERE A.ATTRELID = C.OID
-                AND A.ATTNAME = 'notification_email_send'
+                AND A.ATTNAME = 'notify_email'
                 AND C.relname= 'res_partner';""")
         if self.cr.fetchone():
             self.cr.execute("""
                 ALTER TABLE res_partner
-                    ALTER COLUMN notification_email_send
+                    ALTER COLUMN notify_email
                     %s NOT NULL;""" % (function))
 
     # Overload Section
@@ -80,7 +80,7 @@ class TestBaseFiscalCompany(TransactionCase):
         cr, uid = self.cr, self.uid
         ru_id = self.ru_obj.create(cr, uid, {
             'name': 'new_user',
-            'login': 'new_user',
+            'login': 'new_user@odoo.com',
             'company_id': self.mother_company_id,
             'company_ids': [(4, self.mother_company_id)]})
         ru = self.ru_obj.browse(cr, uid, ru_id)
@@ -96,7 +96,7 @@ class TestBaseFiscalCompany(TransactionCase):
         cr, uid = self.cr, self.uid
         ru_id = self.ru_obj.create(cr, uid, {
             'name': 'new_user',
-            'login': 'new_user',
+            'login': 'new_user@odoo.com',
             'company_id': self.base_company_id,
             'company_ids': [(4, self.base_company_id)]})
         self.ru_obj.write(cr, uid, [ru_id], {
