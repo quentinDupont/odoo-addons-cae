@@ -13,6 +13,7 @@
     'license': 'AGPL-3',
     'depends': [
         'base_fiscal_company',
+        'sales_team_fiscal_company',
         'crm',
     ],
     'data': [
