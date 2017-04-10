@@ -22,8 +22,3 @@
 ##############################################################################
 
 from . import test_base_fiscal_company
-
-
-fast_suite = [
-    test_base_fiscal_company,
-]
