@@ -49,6 +49,9 @@ Copyright, Author and Licence :
         'base_fiscal_company',
         'purchase',
     ],
+    'data': [
+        'views/view_purchase_order.xml',
+    ],
     'installable': True,
     'auto_install': True,
 }
