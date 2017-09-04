@@ -12,5 +12,4 @@ class ProductProduct(models.Model):
     @api.multi
     def _get_domain_locations(self):
         return super(ProductProduct, self.with_context(
-            force_company=self.env.user.company_id.id,
-            compute_child=False))._get_domain_locations()
+            force_company=self.env.user.company_id.id))._get_domain_locations()
