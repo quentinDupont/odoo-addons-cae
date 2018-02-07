@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018 - Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+        <!-- account.fiscal.position.tax -->
+        <record id="pos_pricelist.account_fiscal_position_tax_multi_company_rule" model="ir.rule">
+            <field name="domain_force">['|','|', ('company_id','=',user.company_id.id), ('company_id','=',user.company_id.fiscal_company.id),('company_id', '=', False)]</field>
+        </record>
+
+</data></openerp>
