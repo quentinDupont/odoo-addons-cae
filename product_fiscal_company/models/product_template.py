@@ -42,5 +42,5 @@ class ProductTemplate(models.Model):
         if not self.env.user.has_group(
                 'base_fiscal_company.res_group_administrative_manager'):
             raise UserError(_(
-                "Error: You have no right to create or update an"
+                "You have no right to create or update an"
                 " administrative product"))
