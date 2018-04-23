@@ -57,7 +57,7 @@ Copyright, Author and Licence :
         'demo/ir_sequence.xml',
         'demo/stock_picking_type.xml',
         'demo/pos_config.xml',
-        'demo/product_product.yml',
+        'demo/product_product.xml',
     ],
     'installable': True,
     'auto_install': True,
