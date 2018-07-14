@@ -25,9 +25,10 @@ virtualenv:
 
 before_install:
   - sudo pip install GitPython bzr
-  - sudo pip install cairosvg
-  - sudo pip install barcode    # FIXME bad version of barcode in pip
+  - sudo pip install cairosvg==1.0.22
+  - sudo pip install unidecode
   - sudo pip install unicodecsv
+  - sudo pip install pyBarcode==0.7
 
 install:
   - git clone https://github.com/oca/maintainer-quality-tools.git ${HOME}/maintainer-quality-tools
