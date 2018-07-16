@@ -1,1 +1,1 @@
-pos_01_barcodes https://github.com/grap/pos.git 8.0_BACKPORT_barcodes
+grap-odoo-backport              https://github.com/grap/grap-odoo-backport.git              8.0
