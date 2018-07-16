@@ -1,1 +1,2 @@
+pos
 grap-odoo-backport              https://github.com/grap/grap-odoo-backport.git              8.0
