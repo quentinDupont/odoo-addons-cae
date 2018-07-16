@@ -1,6 +1,6 @@
 [![Build Status](https://travis-ci.org/grap/odoo-addons-cae.svg?branch=8.0)](https://travis-ci.org/grap/odoo-addons-cae)
 [![Coverage Status](https://coveralls.io/repos/github/grap/odoo-addons-cae/badge.svg?branch=8.0)](https://coveralls.io/github/grap/odoo-addons-cae?branch=8.0)
-[![Code Climate](https://codeclimate.com/github/grap/grap-odoo-cae/badges/gpa.svg)](https://codeclimate.com/github/grap/grap-odoo-cae)
+[![Maintainability](https://api.codeclimate.com/v1/badges/da8f9b7729298224a578/maintainability)](https://codeclimate.com/github/grap/odoo-addons-cae/maintainability)
 
 odoo-addons-cae
 ===============
