@@ -21,8 +21,9 @@
     ],
     'data': [
         'security/ir_rule.xml',
-        'view/view.xml',
-        'view/view_stock_picking_type.xml',
+        'views/view_res_company_create_wizard.xml',
+        'views/view_stock_picking_type.xml',
+        'views/view_stock_location_route.xml',
     ],
     'installable': True,
     'auto_install': True,
