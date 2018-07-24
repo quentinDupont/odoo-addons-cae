@@ -11,6 +11,7 @@ License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
         <field name="model">stock.location.route</field>
         <field name="arch" type="xml">
             <search>
+                <field name="name"/>
                 <field name="company_id" groups="base.group_multi_company"/>
                 <filter string='Company' context="{'group_by' : 'company_id'}" groups="base.group_multi_company"/>
             </search>
