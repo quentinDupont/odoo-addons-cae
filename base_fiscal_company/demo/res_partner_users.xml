@@ -9,11 +9,6 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
 
 <!-- Updating base.user_root -->
         <record model="res.users" id="base.user_root">
-            <field name="groups_id" eval="[
-                (4, ref('base.group_multi_company')),
-                (4, ref('base_fiscal_company.res_group_administrative_manager')),
-                (4, ref('base.group_sale_manager')),
-                (4, ref('base.group_no_one'))]"/>
             <field name="company_ids" eval="[
                 (4, ref('base.main_company')),
                 (4, ref('company_fiscal_mother')),
@@ -32,10 +27,6 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="login">accountant</field>
         <field name="password">accountant</field>
         <field name="company_id" ref="company_fiscal_mother"/>
-        <field name="groups_id" eval="[
-            (4, ref('base.group_sale_manager')),
-            (4, ref('base.group_multi_company')),
-            (4, ref('base_fiscal_company.res_group_administrative_manager'))]"/>
         <field name="company_ids" eval="[
             (4, ref('company_fiscal_mother')),
             (4, ref('company_fiscal_child_1')),
@@ -53,9 +44,6 @@ Copyright (C) 2015-Today GRAP (http://www.grap.coop)
         <field name="login">worker</field>
         <field name="password">worker</field>
         <field name="company_id" ref="company_fiscal_child_2"/>
-        <field name="groups_id" eval="[
-            (4, ref('base.group_sale_manager')),
-            (4, ref('base.group_multi_company'))]"/>
         <field name="company_ids" eval="[(4, ref('company_fiscal_child_2'))]"/>
     </record>
 
