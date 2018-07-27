@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2016-Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="project_category_multicompany_rule" model="ir.rule">
+        <field name="name" >Project Category - Multi Company</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'project.category')]"/>
+        <field name="domain_force">['|',
+            ('company_id', 'child_of', user.company_id.id),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+    <record id="project_task_type_multicompany_rule" model="ir.rule">
+        <field name="name" >Project Task Type - Multi Company</field>
+        <field model="ir.model" name="model_id" search="[('model', '=', u'project.task.type')]"/>
+        <field name="domain_force">['|',
+            ('company_id', 'child_of', user.company_id.id),
+            ('company_id','=',False),
+        ]</field>
+    </record>
+
+</data></openerp>

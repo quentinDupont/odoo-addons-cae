@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+Copyright (C) 2018-Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+<openerp><data>
+
+    <record id="view_project_project_search" model="ir.ui.view">
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project_project_filter"/>
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="company_id" groups="base.group_multi_company"/>
+                <filter name="group_by_company_id" string='Company'
+                    context="{'group_by' : 'company_id'}" groups="base.group_multi_company"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_project_project_tree" model="ir.ui.view">
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.view_project"/>
+        <field name="arch" type="xml">
+            <field name="state" position="after">
+                <field name="company_id" groups="base.group_multi_company"/>
+            </field>
+        </field>
+    </record>
+
+    <record id="view_project_project_form" model="ir.ui.view">
+        <field name="model">project.project</field>
+        <field name="inherit_id" ref="project.edit_project"/>
+        <field name="arch" type="xml">
+            <field name="parent_id" position="after">
+                <field name="company_id" groups="base.group_multi_company"/>
+            </field>
+        </field>
+    </record>
+
+</data></openerp>
