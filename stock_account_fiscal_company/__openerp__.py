@@ -15,12 +15,6 @@
         'account_fiscal_company',
         'stock_account',
     ],
-    'data': [
-#        'security/ir_rule.xml',
-#        'views/view_res_company_create_wizard.xml',
-#        'views/view_stock_picking_type.xml',
-#        'views/view_stock_location_route.xml',
-    ],
     'installable': True,
     'auto_install': True,
 }

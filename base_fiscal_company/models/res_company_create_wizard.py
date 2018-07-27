@@ -152,7 +152,7 @@ class ResCompanyCreateWizard(TransientModel):
         ru_obj.write(cr, uid, [uid], {
             'company_id': rc_id,
             'company_ids': [(4, rc_id)],
-            }, context=context)
+        }, context=context)
 
         # Manage Extra Data in Partner associated
         vals = {'customer': False}

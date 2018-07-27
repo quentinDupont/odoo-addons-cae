@@ -116,7 +116,7 @@ class ResCompanyCreateWizard(models.TransientModel):
 
         for model_name in model_list:
             ir_values_obj.set_default(
-                model_name, 'location_id',warehouse.lot_stock_id.id,
+                model_name, 'location_id', warehouse.lot_stock_id.id,
                 company_id=self.company_id.id)
 
         return res

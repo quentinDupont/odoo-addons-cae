@@ -239,7 +239,7 @@ class res_company_create_wizard(TransientModel):
                 pc_obj.write(cr, uid, [category_line.category_id.id], {
                     'property_account_expense_categ': expense_id,
                     'property_account_income_categ': income_id,
-                    }, context=context)
+                }, context=context)
         return res
 
     # View Section
