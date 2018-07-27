@@ -155,8 +155,10 @@ class res_company_create_wizard(TransientModel):
             ip_receivable = ip_obj.browse(
                 cr, uid, ip_receivable_id[0], context=context)
             self.write(cr, uid, rccw.id, {
-                'account_receivable_id': ip_receivable.value_reference.id,
-                'account_payable_id': ip_payable.value_reference.id,
+                'account_receivable_id': int(
+                    ip_receivable.value_reference.split(',')[1]),
+                'account_payable_id': int(
+                    ip_payable.value_reference.split(',')[1]),
             }, context=context)
 
             # We drop some useless properties created by the function
