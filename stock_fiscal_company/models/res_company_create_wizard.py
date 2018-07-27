@@ -1,213 +1,122 @@
-# -*- encoding: utf-8 -*-
-##############################################################################
-#
-#    Fiscal Company for Stock Module for Odoo
-#    Copyright (C) 2014-Today GRAP (http://www.grap.coop)
-#    @author Sylvain LE GAL (https://twitter.com/legalsylvain)
-#
-#    This program is free software: you can redistribute it and/or modify
-#    it under the terms of the GNU Affero General Public License as
-#    published by the Free Software Foundation, either version 3 of the
-#    License, or (at your option) any later version.
-#
-#    This program is distributed in the hope that it will be useful,
-#    but WITHOUT ANY WARRANTY; without even the implied warranty of
-#    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-#    GNU Affero General Public License for more details.
-#
-#    You should have received a copy of the GNU Affero General Public License
-#    along with this program.  If not, see <http://www.gnu.org/licenses/>.
-#
-##############################################################################
-
-from openerp.osv import fields
-from openerp.osv.orm import TransientModel
-from openerp.tools.translate import _
+# coding: utf-8
+# Copyright (C) 2014 - Today: GRAP (http://www.grap.coop)
+# @author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+# License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
 
 
-class res_company_create_wizard(TransientModel):
+from openerp import _, api, fields, models
+
+
+class ResCompanyCreateWizard(models.TransientModel):
     _inherit = 'res.company.create.wizard'
 
-    _columns = {
-        'physical_location_parent_id': fields.many2one(
-            'stock.location', 'Parent Physical Locations', required=True,
-            domain="[('company_id', '=', mother_company)]"),
-        'customer_location_parent_id': fields.many2one(
-            'stock.location', 'Parent Customers Location', required=True,
-            domain="[('company_id', '=', mother_company)]"),
-        'supplier_location_parent_id': fields.many2one(
-            'stock.location', 'Parent Suppliers Location', required=True,
-            domain="[('company_id', '=', mother_company)]"),
-        'inventory_location_parent_id': fields.many2one(
-            'stock.location', 'Parent Inventory Location', required=True,
-            domain="[('company_id', '=', mother_company)]"),
-        'procurement_location_parent_id': fields.many2one(
-            'stock.location', 'Parent Procurement Location', required=True,
-            domain="[('company_id', '=', mother_company)]"),
-        'production_location_parent_id': fields.many2one(
-            'stock.location', 'Parent Production Location', required=True,
-            domain="[('company_id', '=', mother_company)]"),
-        'scrapped_location_parent_id': fields.many2one(
-            'stock.location', 'Parent Scrapped Location', required=True,
-            domain="[('company_id', '=', mother_company)]"),
-    }
+    warehouse_id = fields.Many2one(
+        comodel_name='stock.warehouse', string='Warehouse', readonly=True)
 
     # Overload Section
-    def begin(self, cr, uid, id, context=None):
-        sl_obj = self.pool['stock.location']
-        ip_obj = self.pool['ir.property']
-        sw_obj = self.pool['stock.warehouse']
-        imd_obj = self.pool['ir.model.data']
-        res = super(res_company_create_wizard, self).begin(
-            cr, uid, id, context=context)
-        rccw = self.browse(cr, uid, id, context=context)
+    @api.multi
+    def begin(self):
+        self.ensure_one()
+        warehouse_obj = self.env['stock.warehouse']
+        location_obj = self.env['stock.location']
+        property_obj = self.env['ir.property']
+        ir_values_obj = self.env['ir.values']
 
-        # Create Stock Locations
-        sl_physical_location_id = sl_obj.create(cr, uid, {
-            'name': _('%s - Physical Locations') % (rccw.code),
-            'usage': 'view',
-            'location_id': rccw.physical_location_parent_id.id,
-            'company_id': rccw.company_id.id,
-        }, context=context)
-
-        # TODO Set default value to
-        # location_id   stock.change.product.qty
-        # location_id   stock.fill.inventory
-        # location_id   stock.inventory.line
-        sl_stock_id = sl_obj.create(cr, uid, {
-            'name': _('%s - Stock') % (rccw.code),
-            'usage': 'internal',
-            'location_id': sl_physical_location_id,
-            'company_id': rccw.company_id.id,
-        }, context=context)
-
-        # TODO Check if it's necessary ?!?
-        sl_output_id = sl_obj.create(cr, uid, {
-            'name': _('%s - Output') % (rccw.code),
-            'usage': 'internal',
-            'location_id': sl_physical_location_id,
-            'company_id': rccw.company_id.id,
-        }, context=context)
-
-        sl_customer_location_id = sl_obj.create(cr, uid, {
-            'name': _('%s - Customers') % (rccw.code),
-            'usage': 'customer',
-            'location_id': rccw.customer_location_parent_id.id,
-            'company_id': rccw.company_id.id,
-        }, context=context)
-
-        sl_supplier_location_id = sl_obj.create(cr, uid, {
-            'name': _('%s - Suppliers') % (rccw.code),
-            'usage': 'supplier',
-            'location_id': rccw.supplier_location_parent_id.id,
-            'company_id': rccw.company_id.id,
-        }, context=context)
-
-        sl_inventory_location_id = sl_obj.create(cr, uid, {
-            'name': _('%s - Inventory loss') % (rccw.code),
-            'usage': 'inventory',
-            'location_id': rccw.inventory_location_parent_id.id,
-            'company_id': rccw.company_id.id,
-        }, context=context)
-
-        sl_procurement_location_id = sl_obj.create(cr, uid, {
-            'name': _('%s - Procurements') % (rccw.code),
-            'usage': 'procurement',
-            'location_id': rccw.procurement_location_parent_id.id,
-            'company_id': rccw.company_id.id,
-        }, context=context)
-
-        sl_production_location_id = sl_obj.create(cr, uid, {
-            'name': _('%s - Production') % (rccw.code),
-            'usage': 'production',
-            'location_id': rccw.production_location_parent_id.id,
-            'company_id': rccw.company_id.id,
-        }, context=context)
-
-        # TODO Check if it is necessary
-#        sl_obj.create(cr, uid, {
-#            'name': _('%s - Scrapped') % (rccw.code),
-#            'usage': 'inventory',
-#            'location_id': rccw.scrapped_location_parent_id.id,
-#            'company_id': rccw.company_id.id,
-#            }, context=context)
+        res = super(ResCompanyCreateWizard, self).begin()
 
         # Create WareHouse
-        sw_id = sw_obj.create(cr, uid, {
-            'name': _('%s - Warehouse') % (rccw.code),
-            'lot_input_id': sl_stock_id,
-            'lot_stock_id': sl_stock_id,
-            'lot_output_id': sl_output_id,
-            'company_id': rccw.company_id.id,
-        }, context=context)
+        warehouse = warehouse_obj.create({
+            'name': _('%s - Warehouse') % (self.code),
+            'code': _('WH%s') % (self.code),
+            'company_id': self.company_id.id,
+        })
+        self.warehouse_id = warehouse.id
+
+        # Remove Parent location for the New view that belong Internal Location
+        warehouse.wh_input_stock_loc_id.location_id.location_id = False
+
+        # Create Customer Location
+        customer_location = location_obj.create({
+            'name': _('%s - Customers') % (self.code),
+            'usage': 'customer',
+            'company_id': self.company_id.id,
+        })
+
+        # Use this location for the 'Out' picking.type
+        warehouse.out_type_id.default_location_dest_id = customer_location.id
+
+        # Create Supplier Location
+        supplier_location = location_obj.create({
+            'name': _('%s - Suppliers') % (self.code),
+            'usage': 'supplier',
+            'company_id': self.company_id.id,
+        })
+
+        # Use this location for the 'In' picking.type
+        warehouse.in_type_id.default_location_src_id = supplier_location.id
+
+        # Create Inventory Location
+        inventory_location = location_obj.create({
+            'name': _('%s - Inventory Loss') % (self.code),
+            'usage': 'inventory',
+            'company_id': self.company_id.id,
+        })
+
+        # Create Procurement Location
+        procurement_location = location_obj.create({
+            'name': _('%s - Procurements') % (self.code),
+            'usage': 'procurement',
+            'company_id': self.company_id.id,
+        })
+
+        # Create Production Location
+        production_location = location_obj.create({
+            'name': _('%s - Production') % (self.code),
+            'usage': 'production',
+            'company_id': self.company_id.id,
+        })
 
         # Create Default Properties
-        ip_obj.create(cr, uid, {
+        property_list = [{
             'name': 'property_stock_supplier',
-            'company_id': rccw.company_id.id,
-            'fields_id': imd_obj.get_object_reference(
-                cr, uid, 'stock',
-                'field_res_partner_property_stock_supplier')[1],
-            'type': 'many2one',
-            'value_reference': 'stock.location,%s' % (sl_supplier_location_id),
-        }, context=context)
-
-        ip_obj.create(cr, uid, {
+            'field': 'stock.field_res_partner_property_stock_supplier',
+            'location_id': supplier_location.id,
+        }, {
             'name': 'property_stock_customer',
-            'company_id': rccw.company_id.id,
-            'fields_id': imd_obj.get_object_reference(
-                cr, uid, 'stock',
-                'field_res_partner_property_stock_customer')[1],
-            'type': 'many2one',
-            'value_reference': 'stock.location,%s' % (sl_customer_location_id),
-        }, context=context)
-
-        # TODO Check if it is necessary
-#        ip_obj.create(cr, uid, {
-#            'name': 'property_stock_customer',
-#            'company_id': rccw.company_id.id,
-#            'fields_id': imd_obj.get_object_reference(
-#                cr,uid, 'stock', 'field_res_partner_property_stock_customer')
-#            'type': 'many2one',
-#            'value_reference':
-#                 'stock.location,%s' % (sl_customer_location_id),
-#            'res_id': res['partner_id']
-#            }, context=context)
-
-        ip_obj.create(cr, uid, {
-            'name': 'property_stock_procurement',
-            'company_id': rccw.company_id.id,
-            'fields_id': imd_obj.get_object_reference(
-                cr, uid, 'stock',
-                'field_product_template_property_stock_procurement')[1],
-            'type': 'many2one',
-            'value_reference':
-            'stock.location,%s' % (sl_procurement_location_id),
-        }, context=context)
-
-        ip_obj.create(cr, uid, {
+            'field': 'stock.field_res_partner_property_stock_customer',
+            'location_id': customer_location.id,
+        }, {
             'name': 'property_stock_inventory',
-            'company_id': rccw.company_id.id,
-            'fields_id': imd_obj.get_object_reference(
-                cr, uid, 'stock',
-                'field_product_template_property_stock_inventory')[1],
-            'type': 'many2one',
-            'value_reference':
-            'stock.location,%s' % (sl_inventory_location_id),
-        }, context=context)
-
-        ip_obj.create(cr, uid, {
+            'field': 'stock.field_product_template_property_stock_inventory',
+            'location_id': inventory_location.id,
+        }, {
+            'name': 'property_stock_procurement',
+            'field': 'stock.field_product_template_property_stock_procurement',
+            'location_id': procurement_location.id,
+        }, {
             'name': 'property_stock_production',
-            'company_id': rccw.company_id.id,
-            'fields_id': imd_obj.get_object_reference(
-                cr, uid, 'stock',
-                'field_product_template_property_stock_production')[1],
-            'type': 'many2one',
-            'value_reference':
-            'stock.location,%s' % (sl_production_location_id),
-        }, context=context)
+            'field': 'stock.field_product_template_property_stock_production',
+            'location_id': production_location.id,
+        }]
 
-        res.update({
-            'warehouse_id': sw_id,
-        })
+        for item in property_list:
+            property_obj.create({
+                'name': item['name'],
+                'fields_id': self.env.ref(item['field']).id,
+                'value_reference': 'stock.location,%s' % (item['location_id']),
+                'company_id': self.company_id.id,
+                'type': 'many2one',
+            })
+
+        # Create Default Values
+        model_list = [
+            'stock.inventory.line', 'stock.fill.inventory',
+            'stock.change.product.qty',
+        ]
+
+        for model_name in model_list:
+            ir_values_obj.set_default(
+                model_name, 'location_id',warehouse.lot_stock_id.id,
+                company_id=self.company_id.id)
+
         return res

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+Copyright (C) 2018-Today: GRAP (http://www.grap.coop)
+@author: Sylvain LE GAL (https://twitter.com/legalsylvain)
+License AGPL-3.0 or later (http://www.gnu.org/licenses/agpl.html).
+-->
+
+<openerp><data>
+
+    <record id="view_stock_warehouse_search" model="ir.ui.view">
+        <field name="model">stock.warehouse</field>
+        <field name="arch" type="xml">
+            <search>
+                <field name="name"/>
+                <field name="company_id" groups="base.group_multi_company"/>
+                <filter name="group_by_company_id" string='Company'
+                    context="{'group_by' : 'company_id'}" groups="base.group_multi_company"/>
+            </search>
+        </field>
+    </record>
+
+    <record id="view_stock_warehouse_tree" model="ir.ui.view">
+        <field name="model">stock.warehouse</field>
+        <field name="inherit_id" ref="stock.view_warehouse_tree" />
+        <field name="arch" type="xml">
+            <field name="partner_id" position="after">
+                <field name="company_id" groups="base.group_multi_company"/>
+            </field>
+        </field>
+    </record>
+
+</data></openerp>
